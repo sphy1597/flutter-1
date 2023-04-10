@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app/qrcamera.dart';
 
 void main() => runApp(QrApp());
 
@@ -25,7 +26,8 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('QR코드 검색',
+          title: Text(
+            'QR코드 검색',
             style: new TextStyle(
               fontSize: 30.0,
               color: Colors.black,
@@ -34,8 +36,7 @@ class MyButton extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body:
-        Container(
+        body: Container(
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height * 1,
             decoration: const BoxDecoration(
@@ -43,35 +44,43 @@ class MyButton extends StatelessWidget {
             ),
             child: Align(
               alignment: const AlignmentDirectional(0, 0),
-              child:Column(
+              child: Column(
                 children: [
                   Padding(
-                      padding: const EdgeInsets.all(10),
-                      child:
-                      SizedBox(
-                        height: 60,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            print('카메라 사용하기 button');
-                          },
-                          child: Text('카메라 사용하기',
-                            style: new TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
+                    padding: const EdgeInsets.all(10),
+                    child: SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          print('카메라 사용하기 button');
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const QRcodeWidget()),
+                          ).then((value) {
+                            String receive = value;
+                            print('전달받은 값 : $receive');
+                          });
+                        },
+                        child: Text(
+                          '카메라 사용하기',
+                          style: new TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
                           ),
-                          style: ElevatedButton.styleFrom(
-                              primary: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              // padding: const EdgeInsets.all(10),
-                              elevation: 0.0),
                         ),
+                        style: ElevatedButton.styleFrom(
+                            primary: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            // padding: const EdgeInsets.all(10),
+                            elevation: 0.0),
                       ),
                     ),
+                  ),
 
                   // Container(
                   //   color:Colors.red,
@@ -81,8 +90,6 @@ class MyButton extends StatelessWidget {
                   // )
                 ],
               ),
-            )
-        )
-    );
+            )));
   }
 }
