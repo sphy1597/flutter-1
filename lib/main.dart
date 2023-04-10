@@ -1,115 +1,128 @@
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'OCR',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.orange,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: ImageSelectionScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
+class ImageSelectionScreen extends StatefulWidget {
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ImageSelectionScreenState createState() => ImageSelectionScreenState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+// 사진 촬영
+class ImageSelectionScreenState extends State<ImageSelectionScreen> {
+  String result = ''; // OCR 결과를 저장할 변수
+  Future<void> getImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.camera);
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+    if (pickedFile != null) {
+      // API 엔드포인트 URL
+      String apiUrl =
+          'https://c7ulcdtg3k.apigw.ntruss.com/custom/v1/21393/a1fc963e0e2561d86135dcdca7004ff703dab7708c96d070ebd52a28ec853602/general';
+
+      // API 키
+      String apiKey = 'WnlMQ0x1SnlCd0JCbmlhWVBOWWVtUFdTb1lFZXNaRWM=';
+
+      // 이미지 파일 경로
+      String imageFilePath = pickedFile.path;
+
+      // API 요청 헤더
+      Map<String, String> headers = {
+        'X-OCR-SECRET': apiKey,
+        'Content-Type': 'application/json'
+      };
+
+      // API 요청 바디
+      Map<String, dynamic> requestBody = {
+        'images': [
+          {'format': 'jpg', 'name': 'demo'}
+        ],
+        'requestId': Uuid().v4(),
+        'version': 'V2',
+        'timestamp': DateTime.now().millisecondsSinceEpoch
+      };
+
+      // 이미지 파일 바이너리 읽기
+      File imageFile = File(imageFilePath);
+      List<int> imageBytes = await imageFile.readAsBytes(); // 이진데이터로 변환
+
+      // 이미지 바이너리 인코딩 및 API 요청 바디에 추가
+      String base64Image = base64Encode(imageBytes); // 이진데이터를 base64로 인코딩
+      requestBody['images'][0]['data'] =
+          base64Image; // data를 base64로 인코딩한 값으로 저장
+
+      // API 요청
+      http.Response response = await http.post(Uri.parse(apiUrl),
+          headers: headers, body: jsonEncode(requestBody));
+
+      // API 응답 처리
+      if (response.statusCode == 200) {
+        Map<String, dynamic> responseBody = jsonDecode(response.body);
+        List<dynamic> fields = responseBody['images'][0]['fields']; // 필드이름 저장
+        result = fields
+            .map((field) => field['inferText']) // 필드이름이 inferText인 것만 추출
+            .join(' '); // infertext 합치기
+        print(responseBody); // 리스폰스 출력(원래 전체값)
+        print(result); // intertext만 출력(추출한 값)
+        setState(() {
+          result = result; // result 최신화
+        });
+      } else {
+        print('API request failed with status code ${response.statusCode}');
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text('문자 인식',
+            style: new TextStyle(
+              fontSize: 30.0,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+            )),
+        centerTitle: true,
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
+            SizedBox(height: 20),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              result,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                getImage();
+              },
+              child: Text('사진 찍기'),
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
