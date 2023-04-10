@@ -108,17 +108,41 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: 20),
-            Text(
-              result,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            // SizedBox(
+            //   height: 5,
+            //   width: 5,
+            // ),
+            Container(
+                padding: EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  result,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                )),
+            SizedBox(
+              height: 50,
             ),
-            ElevatedButton(
-              onPressed: () {
-                getImage();
-              },
-              child: Text('사진 찍기'),
-            ),
+            Container(
+              width: 200,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  getImage();
+                },
+                child: Text(
+                  '사진 찍기',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                ),
+              ),
+            )
+
+            // ElevatedButton(
+            //   onPressed: () {
+            //     getImage();
+            //   },
+            //   child: Text('사진 찍기'),
+            // ),
           ],
         ),
       ),
