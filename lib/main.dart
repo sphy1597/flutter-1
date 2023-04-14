@@ -1,5 +1,6 @@
 import 'package:app/qr.dart';
 import 'package:flutter/material.dart';
+import 'package:app/OCR.dart';
 
 void main() => runApp(MyApp());
 
@@ -160,6 +161,11 @@ class MyButton extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {
                               print('글자 인식 button');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const OCRApp()),
+                              );
                             },
                             child: Text(
                               '글자 인식',
