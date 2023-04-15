@@ -1,25 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:app/main.dart';
 import 'package:app/settings/user_info.dart';
 
 void main() => runApp(const SettingsMain());
 
 class SettingsMain extends StatelessWidget {
   const SettingsMain({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: '환경설정',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: const MyButton(),
-    );
-  }
-}
-
-class MyButton extends StatelessWidget {
-  const MyButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +20,28 @@ class MyButton extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.popUntil(context, (route) => false);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const MyApp()),
+            );
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.popUntil(context, (route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+            },
+            icon: const Icon(Icons.home),
+          ),
+        ],
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -60,7 +68,7 @@ class MyButton extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const UserInfo()
+                                builder: (context) => const UserInfo()
                             ),
                           );
                         },

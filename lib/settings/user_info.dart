@@ -1,32 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:app/main.dart';
 
 void main() => runApp(const UserInfo());
 
-class UserInfo extends StatelessWidget {
+class UserInfo extends StatefulWidget {
   const UserInfo({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: '개인 기본정보',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: const MyButton(),
-    );
-  }
-}
-
-class MyButton extends StatefulWidget {
-  const MyButton({Key? key}) : super(key: key);
 
   @override
-  State<MyButton> createState() => _MyButtonState();
+  State<UserInfo> createState() => _UserInfoState();
 }
 
-class _MyButtonState extends State<MyButton> {
+class _UserInfoState extends State<UserInfo> {
   final _prefsVisualKey = 'selectedVisualImpairment';
   final _prefsGenderKey = 'selectedGender';
   final _prefsYearKey = 'selectedYear';
@@ -143,6 +129,24 @@ class _MyButtonState extends State<MyButton> {
             ),
           ),
           centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.popUntil(context, (route) => false);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyApp()),
+                );
+              },
+              icon: const Icon(Icons.home),
+            ),
+          ],
         ),
         body: Container(
             width: MediaQuery.of(context).size.width,
