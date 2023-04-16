@@ -62,7 +62,7 @@ class MyButton extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const QrApp()),
+                                    builder: (context) => QRcodeWidget()),
                               );
                             },
                             style: ElevatedButton.styleFrom(

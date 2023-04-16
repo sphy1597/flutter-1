@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:app/qrcamera.dart';
 
-void main() => runApp(QrApp());
-
-class QrApp extends StatelessWidget {
-  const QrApp({Key? key}) : super(key: key);
+class QRcodeWidget extends StatefulWidget {
+  const QRcodeWidget({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'button',
-      theme: ThemeData(
-        primarySwatch: Colors.orange,
-      ),
-      home: MyButton(),
-    );
-  }
+  State<QRcodeWidget> createState() => _QRcodeWidgetState();
 }
 
-class MyButton extends StatelessWidget {
-  const MyButton({Key? key}) : super(key: key);
+class _QRcodeWidgetState extends State<QRcodeWidget> {
+  final GlobalKey qrKey = GlobalKey(debugLabel: "QR");
+
+  String name = "약 이름";
+  String howeat = "복용법";
+  String effect = "효능";
+  String becareful = "주의사항";
 
   @override
   Widget build(BuildContext context) {
@@ -58,10 +52,22 @@ class MyButton extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const QRcodeWidget()),
+                                  builder: (context) => const QRcameraWidget()),
                             ).then((value) {
                               String receive = value;
                               print('전달받은 값 : $receive');
+
+                              List<String> data = receive.split('//');
+                              if (data[0] == "medieyes") {
+                                setState(() {
+                                  name = data[1];
+                                  howeat = data[2];
+                                  effect = data[3];
+                                  becareful = data[4];
+                                });
+                              } else if (data[0] == "http:" ||
+                                  data[0] == "https:") {
+                              } else {}
                             });
                           },
                           style: ElevatedButton.styleFrom(
@@ -86,7 +92,7 @@ class MyButton extends StatelessWidget {
                   ),
                   Expanded(
                       //약 이름
-                      flex: 1,
+                      flex: 2,
                       child: Padding(
                         padding: EdgeInsets.all(8),
                         child: Container(
@@ -96,9 +102,9 @@ class MyButton extends StatelessWidget {
                               color: Color.fromARGB(255, 242, 227, 219)),
                           child: Center(
                             child: Text(
-                              '약 이름',
+                              name, // 약 이름
                               style: TextStyle(
-                                fontSize: 30,
+                                fontSize: 20,
                               ),
                             ),
                           ),
@@ -106,7 +112,7 @@ class MyButton extends StatelessWidget {
                       )),
                   Expanded(
                     // 복용법
-                    flex: 1,
+                    flex: 2,
                     child: Padding(
                         padding: EdgeInsets.all(8),
                         child: Container(
@@ -116,7 +122,7 @@ class MyButton extends StatelessWidget {
                                 color: Color.fromRGBO(243, 232, 255, 1)),
                             child: Center(
                               child: Text(
-                                '복용법',
+                                howeat, // 복용법
                                 style: TextStyle(
                                   fontSize: 20,
                                 ),
@@ -135,7 +141,7 @@ class MyButton extends StatelessWidget {
                               color: Color.fromRGBO(220, 250, 210, 1)),
                           child: Center(
                             child: Text(
-                              '효능',
+                              effect, // 복용법
                               style: TextStyle(
                                 fontSize: 20,
                               ),
@@ -145,7 +151,7 @@ class MyButton extends StatelessWidget {
                       )),
                   Expanded(
                       //주의사항
-                      flex: 3,
+                      flex: 2,
                       child: Padding(
                         padding: EdgeInsets.all(8),
                         child: Container(
@@ -155,10 +161,12 @@ class MyButton extends StatelessWidget {
                               color: Color.fromRGBO(230, 230, 230, 1)),
                           child: Padding(
                             padding: EdgeInsets.all(10),
-                            child: Text(
-                              '주의사항',
-                              style: TextStyle(
-                                fontSize: 20,
+                            child: Center(
+                              child: Text(
+                                becareful, //주의사항
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
                               ),
                             ),
                           ),
