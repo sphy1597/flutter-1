@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
-class QRcodeWidget extends StatefulWidget {
-  const QRcodeWidget({super.key});
+class QRcameraWidget extends StatefulWidget {
+  const QRcameraWidget({super.key});
 
   @override
-  State<QRcodeWidget> createState() => _QRcodeWidgetState();
+  State<QRcameraWidget> createState() => _QRcameraWidgetState();
 }
 
-class _QRcodeWidgetState extends State<QRcodeWidget> {
+class _QRcameraWidgetState extends State<QRcameraWidget> {
   final GlobalKey qrKey = GlobalKey(debugLabel: "QR");
   QRViewController? controller;
   String result = "";
@@ -40,7 +40,7 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("QR Code Scanner"),
+        title: const Text("QR Code Scanner"),
       ),
       body: Column(
         children: [
@@ -50,31 +50,14 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
               )),
-          Expanded(
-              flex: 1,
+          const Expanded(
+              flex: 2,
               child: Center(
                 child: Text(
-                  "Scan Result: $result",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
+                  "QR코드를 카메라에 보여주세요",
+                  style: TextStyle(fontSize: 20),
                 ),
               )),
-          Expanded(
-              flex: 1,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ElevatedButton(
-                    child: Text('QRinfo'),
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/qrinfo',
-                          arguments: result);
-                      result = "";
-                    },
-                  )
-                ],
-              ))
         ],
       ),
     );
