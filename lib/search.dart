@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
+
+import 'package:app/main.dart';
 import 'package:app/searchPage.dart';
 
 void main() => runApp(SearchApp());
@@ -65,35 +67,53 @@ class _SearchPageState extends State<SearchApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           '약 검색',
-          style: new TextStyle(
+          style: TextStyle(
             fontSize: 30.0,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.popUntil(context, (route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+            },
+            icon: const Icon(Icons.home),
+          ),
+        ],
       ),
       body: Column(
         children: [
           TextFormField(
             // 검색필드
             controller: meName,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               labelText: '약 이름을 작성해주세요',
             ),
           ),
           ElevatedButton(
             // 검색 버튼
             onPressed: getData,
-            child: Text(
+            child: const Text(
               '검색',
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             // 검색 버튼아래에 빈공간 만들기
             height: 20,
           ),
