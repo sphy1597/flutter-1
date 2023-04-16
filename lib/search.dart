@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
+
+import 'package:app/main.dart';
 import 'package:app/searchPage.dart';
 
 void main() => runApp(SearchApp());
@@ -74,6 +76,24 @@ class _SearchPageState extends State<SearchApp> {
           ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.popUntil(context, (route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+            },
+            icon: const Icon(Icons.home),
+          ),
+        ],
       ),
       body: Column(
         children: [

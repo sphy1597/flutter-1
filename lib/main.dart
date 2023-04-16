@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+
 import 'package:app/OCR.dart';
+import 'package:app/search.dart';
 import 'package:app/qr.dart';
 import 'package:app/settings/settings_main.dart';
 
@@ -128,6 +130,11 @@ class MyButton extends StatelessWidget {
                           child: ElevatedButton(
                             onPressed: () {
                               print('약 검색 button');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SearchApp()),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.orangeAccent, // 텍스트 버튼과 다르게 배경색 변경
