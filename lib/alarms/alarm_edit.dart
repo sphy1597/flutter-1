@@ -57,7 +57,10 @@ class _AlarmEditState extends State<AlarmEdit> {
             minuteTitle: '분',
             hourTitle: '시',
             saveButtonText: '저장'));
-    if (res != null) setState(() => selectedTime = res);
+    if (res != null)
+      setState(() {
+        selectedTime = TimeOfDay(hour: res.hour, minute: res.minute);
+      });
   }
 
   //  Future<void> pickTime() async {
