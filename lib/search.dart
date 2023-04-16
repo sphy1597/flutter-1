@@ -37,23 +37,18 @@ class _SearchPageState extends State<SearchApp> {
   List<Widget> buildItemListButtons() {
     return itemList
         .map((item) => ElevatedButton(
+            // 의약품 리스트대로 텍스트 버튼 생성
             onPressed: () {
               // 의약품 터치했을 때
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => searchPage(item: item)));
-              print("제품코드 : " + item['itemSeq']);
-              print("제품명 : " + item['itemName']);
-              print("효능 : " +
-                  item['efcyQesitm'].replaceAll(
-                      RegExp("<p>|</p>|<hr>|\\n|<br />"),
-                      "")); // <p>, </p>, <hr>, \n, <br /> 제거
             },
             child: Container(
                 width: MediaQuery.of(context).size.width * 0.85, // 화면 크기의 85%
                 child: Text(
-                  item['itemName'],
+                  item['itemName'], // 의약품 이름으로 Text 설정
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 )),
