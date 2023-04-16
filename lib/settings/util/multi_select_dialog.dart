@@ -219,7 +219,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
     return AlertDialog(
       backgroundColor: widget.backgroundColor,
       title: widget.searchable == false
-          ? widget.title ?? const Text("Select")
+          ? widget.title ?? const Text("선택")
           : Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -231,7 +231,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
                 style: widget.searchTextStyle,
                 decoration: InputDecoration(
                   hintStyle: widget.searchHintStyle,
-                  hintText: widget.searchHint ?? "Search",
+                  hintText: widget.searchHint ?? "검색",
                   focusedBorder: UnderlineInputBorder(
                     borderSide: BorderSide(
                       color: widget.selectedColor ??
@@ -255,7 +255,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
               ),
             ),
           )
-              : widget.title ?? Text("Select"),
+              : widget.title ?? Text("선택"),
           IconButton(
             icon: _showSearch
                 ? widget.closeSearchIcon ?? Icon(Icons.close)
@@ -300,7 +300,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
         TextButton(
           child: widget.cancelText ??
               Text(
-                "CANCEL",
+                "취소",
                 style: TextStyle(
                   color: (widget.selectedColor != null &&
                       widget.selectedColor != Colors.transparent)
@@ -315,7 +315,7 @@ class _MultiSelectDialogState<T> extends State<MultiSelectDialog<T>> {
         TextButton(
           child: widget.confirmText ??
               Text(
-                'OK',
+                '확인',
                 style: TextStyle(
                   color: (widget.selectedColor != null &&
                       widget.selectedColor != Colors.transparent)
