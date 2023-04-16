@@ -132,23 +132,23 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
             //   width: 5,
             // ),
             Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   result,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
-            Container(
+            SizedBox(
               width: 200,
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
                   getImage();
                 },
-                child: Text(
+                child: const Text(
                   '사진 찍기',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
