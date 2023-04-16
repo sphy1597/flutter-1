@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:app/main.dart';
 import './util/multi_select_flutter.dart';
@@ -51,6 +53,53 @@ class _AllergyInfoState extends State<AllergyInfo> {
       .toList();
 
   List<Allergy> _selectedAllergies = [];
+
+  _saveAllergies() async {
+    List<Map<String, dynamic>> allergyList = _selectedAllergies
+        .map((allergy) => {'id': allergy.id, 'name': allergy.name})
+        .toList();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedAllergies', json.encode(allergyList));
+    print(allergyList);
+  }
+
+  void loadSelectedAllergies() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? allergiesJson = prefs.getString('selectedAllergies');
+    print("allergiesJSON");
+    print(allergiesJson);
+    if (allergiesJson != null) {
+      List<dynamic> allergyList = json.decode(allergiesJson);
+      setState(() {
+        _selectedAllergies = allergyList.map((allergy) {
+          return Allergy(id: allergy['id'], name: allergy['name']);
+        }).toList();
+        print("_Selected");
+        int i = 0;
+        while (i<_selectedAllergies.length){
+          print(_selectedAllergies[i].name);
+          i++;
+        }
+      });
+      // _savedItems = _selectedAllergies
+      //     .map((allergy) => MultiSelectItem<Allergy>(allergy, allergy.name))
+      //     .toList();
+    } else {
+      _emptyAllergies();
+    }
+  }
+
+  void _emptyAllergies() {
+    setState(() {
+      _selectedAllergies = [];
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    loadSelectedAllergies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -130,6 +179,7 @@ class _AllergyInfoState extends State<AllergyInfo> {
                                 setState(() {
                                   _selectedAllergies = values.cast<Allergy>();
                                 });
+                                _saveAllergies();
 
                               },
                               chipDisplay: MultiSelectChipDisplay(
@@ -138,6 +188,7 @@ class _AllergyInfoState extends State<AllergyInfo> {
                                   setState(() {
                                     _selectedAllergies.remove(value);
                                   });
+                                  _saveAllergies();
                                 },
                               ),
                             ),
