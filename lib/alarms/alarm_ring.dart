@@ -21,43 +21,43 @@ class AlarmRing extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                RawMaterialButton(
-                  onPressed: () {
-                    final now = DateTime.now();
-                    Alarm.set(
-                      // 5분뒤 설정
-                      alarmSettings: alarmSettings.copyWith(
-                        dateTime: DateTime(
-                          now.year,
-                          now.month,
-                          now.day,
-                          now.hour,
-                          now.minute,
-                          0,
-                          0,
-                        ).add(const Duration(minutes: 5)),
-                      ),
-                    ).then((_) => Navigator.pop(context));
-                    Alarm.set(
-                      // 원래 시간 다시 설정
-                      alarmSettings: alarmSettings.copyWith(
-                        dateTime: DateTime(
-                          now.year,
-                          now.month,
-                          now.day,
-                          now.hour,
-                          now.minute,
-                          0,
-                          0,
-                        ).add(const Duration(days: 1)),
-                      ),
-                    ).then((_) => Navigator.pop(context));
-                  },
-                  child: Text(
-                    "5분후 다시",
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                ),
+                // RawMaterialButton(
+                //   onPressed: () {
+                //     final now = DateTime.now();
+                //     Alarm.set(
+                //       // 원래 시간 다시 설정
+                //       alarmSettings: alarmSettings.copyWith(
+                //         dateTime: DateTime(
+                //           now.year,
+                //           now.month,
+                //           now.day,
+                //           now.hour,
+                //           now.minute,
+                //           0,
+                //           0,
+                //         ).add(const Duration(days: 1)),
+                //       ),
+                //     ).then((_) => Navigator.pop(context));
+                //     Alarm.set(
+                //       // 원래 시간 다시 설정
+                //       alarmSettings: alarmSettings.copyWith(
+                //         dateTime: DateTime(
+                //           now.year,
+                //           now.month,
+                //           now.day,
+                //           now.hour,
+                //           now.minute,
+                //           0,
+                //           0,
+                //         ).add(const Duration(minutes: 5)),
+                //       ),
+                //     );
+                //   },
+                //   child: Text(
+                //     "5분후 다시",
+                //     style: Theme.of(context).textTheme.titleLarge,
+                //   ),
+                // ),
                 RawMaterialButton(
                   onPressed: () {
                     final now = DateTime.now();
