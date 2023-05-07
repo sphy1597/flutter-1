@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:app/OCR.dart';
-import 'package:app/search.dart';
-import 'package:app/qr.dart';
+import 'package:app/ocr/OCR.dart';
+import 'package:app/search/search.dart';
+import 'package:app/qr/qr.dart';
 import 'package:app/settings/settings_main.dart';
 import 'package:app/alarms/alarm_main.dart';
 import 'package:alarm/alarm.dart';
