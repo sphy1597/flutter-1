@@ -38,9 +38,25 @@ class _AllergyInfoState extends State<AllergyInfo> {
     '뇌혈관질환': false,
   };
 
+  List<String> _selectedAllergies = [];
+
   _saveAllergies() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString('allergies', json.encode(allergies));
+
+    for (String key in allergies.keys){
+      if (allergies[key] == true){
+        if (!_selectedAllergies.contains(key)){
+          _selectedAllergies.add(key);
+        }
+      } else {
+          if (_selectedAllergies.contains(key)){
+            _selectedAllergies.remove(key);
+          }
+      }
+    }
+    prefs.setStringList('_selectedAllergies', _selectedAllergies);
+    print(_selectedAllergies);
   }
 
   void loadSelectedAllergies() async {
