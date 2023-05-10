@@ -1,9 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
-
 import 'package:app/main.dart';
 import 'searchPage.dart';
+import 'package:app/settings/allergy_info.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(SearchApp());
 
@@ -16,8 +17,64 @@ class _SearchPageState extends State<SearchApp> {
   final TextEditingController meName = TextEditingController();
   List<dynamic> itemList = []; // 의약품 리스트
 
+  Map<String, dynamic> allergies = {
+    '해산물': false,
+    '견과류': false,
+    '곡류': false,
+    '천식': false,
+    '아토피': false,
+    '비염': false,
+    '혈압': false,
+    '신부전증': false,
+    '과민증': false,
+    '당뇨': false,
+    '암': false,
+    '편두통': false,
+    '간질환': false,
+    '신장질환': false,
+    '소화기질환': false,
+    '호흡질환': false,
+    '정신질환': false,
+    '근육질환': false,
+    '심혈관질환': false,
+    '뇌혈관질환': false,
+  };
+
+  void loadSelectedAllergies() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    setState(() {
+      allergies = Map<String, dynamic>.from(prefs.getString('allergies') != null
+          ? json.decode(prefs.getString('allergies')!)
+          : {
+              '해산물': false,
+              '견과류': false,
+              '곡류': false,
+              '천식': false,
+              '아토피': false,
+              '비염': false,
+              '혈압': false,
+              '신부전증': false,
+              '과민증': false,
+              '당뇨': false,
+              '암': false,
+              '편두통': false,
+              '간질환': false,
+              '신장질환': false,
+              '소화기질환': false,
+              '호흡질환': false,
+              '정신질환': false,
+              '근육질환': false,
+              '심혈관질환': false,
+              '뇌혈관질환': false,
+            });
+    });
+    print(allergies);
+  }
+
   Future<void> getData() async {
     // 검색 버튼 눌렀을때
+    loadSelectedAllergies();
     var url = Uri.parse(
         'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList'); // url주소
     var params = {
@@ -42,10 +99,34 @@ class _SearchPageState extends State<SearchApp> {
             // 의약품 리스트대로 텍스트 버튼 생성
             onPressed: () {
               // 의약품 터치했을 때
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => searchPage(item: item)));
+              // 알러지의 true 값과 의약품의 주의사항경고 비교
+              //if (item['atpnWarnQesitm'] || item['atpnQesitm'])
+              // 참이면 showDialog경고창 띄우기
+              // else는 그냥 상세페이지 이동
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text("경고"),
+                    content: Text("의약품 복용에 주의해주세요."),
+                    // 어떤 거랑 겹치는지 Text 수정 예정
+                    actions: [
+                      TextButton(
+                        child: Text("확인"),
+                        onPressed: () {
+                          Navigator.pop(context); // 경고창 닫기
+                          Navigator.push(
+                              // 의약품 상세페이지로 이동
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      SearchPage(item: item)));
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             child: Container(
                 width: MediaQuery.of(context).size.width * 0.85, // 화면 크기의 85%
