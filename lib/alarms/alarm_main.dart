@@ -145,7 +145,7 @@ class _AlarmWidgetState extends State<AlarmWidget> {
                 // padding: const EdgeInsets.all(10),
                 elevation: 0.0),
             child: const Text(
-              'QR코드 검색',
+              '알람 설정',
               style: TextStyle(
                 fontSize: 26.0,
                 color: Colors.black,
