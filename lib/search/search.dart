@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:app/main.dart';
 import 'searchPage.dart';
-import 'package:app/settings/allergy_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(SearchApp());
@@ -98,17 +97,30 @@ class _SearchPageState extends State<SearchApp> {
         .map((item) => ElevatedButton(
             // 의약품 리스트대로 텍스트 버튼 생성
             onPressed: () {
+              print(allergies); // 알러지 배열 출력 테스트
+              print(item['atpnQesitm']); // 해당 의약품 주의사항 출력 테스트
               // 의약품 터치했을 때
               // 알러지의 true 값과 의약품의 주의사항경고 비교
-              //if (item['atpnWarnQesitm'] || item['atpnQesitm'])
+              // if (item['atpnWarnQesitm'] || item['atpnQesitm'])
               // 참이면 showDialog경고창 띄우기
               // else는 그냥 상세페이지 이동
+
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   return AlertDialog(
-                    title: Text("경고"),
-                    content: Text("의약품 복용에 주의해주세요."),
+                    title: Text("경고",
+                        style: TextStyle(
+                            fontSize: 30, fontWeight: FontWeight.bold)),
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
+                            style: TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold)),
+                      ],
+                    ),
+
                     // 어떤 거랑 겹치는지 Text 수정 예정
                     actions: [
                       TextButton(

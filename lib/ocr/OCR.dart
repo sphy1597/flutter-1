@@ -116,47 +116,39 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // SizedBox(
-            //   height: 5,
-            //   width: 5,
-            // ),
-            Container(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   result,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 50, fontWeight: FontWeight.bold),
-                )),
-            const SizedBox(
-              height: 50,
-            ),
-            SizedBox(
-              width: 200,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-                  getImage();
-                },
-                child: const Text(
-                  '사진 찍기',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
-            )
-
-            // ElevatedButton(
-            //   onPressed: () {
-            //     getImage();
-            //   },
-            //   child: Text('사진 찍기'),
-            // ),
-          ],
+              const SizedBox(
+                height: 50,
+              ),
+              SizedBox(
+                width: 200,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: () {
+                    getImage();
+                  },
+                  child: const Text(
+                    '사진 찍기',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
