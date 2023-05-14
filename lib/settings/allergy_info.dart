@@ -5,7 +5,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:app/main.dart';
 import './util/multi_select_flutter.dart';
 
-void main() => runApp(const AllergyInfo(title: '',));
+void main() => runApp(const AllergyInfo(
+      title: '',
+    ));
 
 class Allergy {
   final int id;
@@ -76,7 +78,7 @@ class _AllergyInfoState extends State<AllergyInfo> {
         }).toList();
         print("_Selected");
         int i = 0;
-        while (i<_selectedAllergies.length){
+        while (i < _selectedAllergies.length) {
           print(_selectedAllergies[i].name);
           i++;
         }
@@ -149,16 +151,12 @@ class _AllergyInfoState extends State<AllergyInfo> {
                           padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
                           child: Align(
                               alignment: Alignment.topLeft,
-                              child: Text(
-                                  '알러지 추가',
+                              child: Text('알러지 추가',
                                   style: TextStyle(
                                     fontSize: 25.0,
                                     color: Colors.black,
                                   ),
-                                  textAlign: TextAlign.left
-                              )
-                          )
-                      ),
+                                  textAlign: TextAlign.left))),
                       Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
@@ -180,7 +178,6 @@ class _AllergyInfoState extends State<AllergyInfo> {
                                   _selectedAllergies = values.cast<Allergy>();
                                 });
                                 _saveAllergies();
-
                               },
                               chipDisplay: MultiSelectChipDisplay(
                                 items: _items,
@@ -194,12 +191,12 @@ class _AllergyInfoState extends State<AllergyInfo> {
                             ),
                             _selectedAllergies.isEmpty
                                 ? Container(
-                                padding: const EdgeInsets.all(10),
-                                alignment: Alignment.centerLeft,
-                                child: const Text(
-                                  "선택된 질병 및 알러지 정보가 없습니다.",
-                                  style: TextStyle(color: Colors.black54),
-                                ))
+                                    padding: const EdgeInsets.all(10),
+                                    alignment: Alignment.centerLeft,
+                                    child: const Text(
+                                      "선택된 질병 및 알러지 정보가 없습니다.",
+                                      style: TextStyle(color: Colors.black54),
+                                    ))
                                 : Container(),
                           ],
                         ),
@@ -207,9 +204,6 @@ class _AllergyInfoState extends State<AllergyInfo> {
                       const SizedBox(height: 40),
                     ],
                   ),
-                )
-            )
-        )
-    );
+                ))));
   }
 }

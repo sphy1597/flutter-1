@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:app/audioutill/audioUtil.dart';
 import 'package:app/main.dart';
 import 'package:app/qr/qrcamera.dart';
 
@@ -33,6 +33,7 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
+              AudioUtil.audioplay();
               Navigator.pop(context);
             },
             icon: const Icon(Icons.arrow_back),
@@ -40,6 +41,7 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
           actions: [
             IconButton(
               onPressed: () {
+                AudioUtil.audioplay();
                 Navigator.popUntil(context, (route) => false);
                 Navigator.push(
                   context,
@@ -69,6 +71,7 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
                         child: ElevatedButton(
                           onPressed: () {
                             print('카메라 사용하기 button');
+                            AudioUtil.audioplay();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
