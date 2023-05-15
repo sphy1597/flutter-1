@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:app/audioutill/audioUtil.dart';
 
 import 'package:app/main.dart';
 import 'searchPage.dart';
@@ -17,6 +18,7 @@ class _SearchPageState extends State<SearchApp> {
   List<dynamic> itemList = []; // 의약품 리스트
 
   Future<void> getData() async {
+    AudioUtil.audioplay(); // 화면 전환 소리
     // 검색 버튼 눌렀을때
     var url = Uri.parse(
         'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList'); // url주소

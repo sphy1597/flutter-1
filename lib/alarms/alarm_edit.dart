@@ -2,6 +2,7 @@ import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
 import 'package:time_picker_sheet/widget/time_picker.dart';
 import 'package:time_picker_sheet/widget/sheet.dart';
+import 'package:app/audioutill/audioUtil.dart';
 
 class AlarmEdit extends StatefulWidget {
   final AlarmSettings? alarmSettings;
@@ -49,6 +50,7 @@ class _AlarmEditState extends State<AlarmEdit> {
   }
 
   Future<void> pickTime() async {
+    AudioUtil.audioplay(); // 화면 전환 소리
     final res = await TimePicker.show(
         context: context,
         sheet: TimePickerSheet(
@@ -103,11 +105,13 @@ class _AlarmEditState extends State<AlarmEdit> {
   }
 
   void saveAlarm() {
+    AudioUtil.audioplay(); // 화면 전환 소리
     Alarm.set(alarmSettings: buildAlarmSettings())
         .then((_) => Navigator.pop(context, true));
   }
 
   Future<void> deleteAlarm() async {
+    AudioUtil.audioplay(); // 화면 전환 소리
     Alarm.stop(widget.alarmSettings!.id)
         .then((_) => Navigator.pop(context, true));
   }
@@ -123,7 +127,10 @@ class _AlarmEditState extends State<AlarmEdit> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: () => Navigator.pop(context, false),
+                onPressed: () => {
+                  AudioUtil.audioplay(), // 화면 전환 소리
+                  Navigator.pop(context, false)
+                },
                 child: Text(
                   "취소",
                   style: Theme.of(context)
