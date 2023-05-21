@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:app/audioutill/audioUtil.dart';
 
 class QRcameraWidget extends StatefulWidget {
   const QRcameraWidget({super.key});
@@ -24,7 +25,11 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       if (scanData.code != null) {
+        AudioUtil.audioplay();
+
+        //태그로 잘라서 바로 넘어감
         if (scanData.code!.contains('레세티정')) {
+          AudioUtil.audioplay();
           this.controller!.dispose();
           Navigator.pop(context, scanData.code);
         }

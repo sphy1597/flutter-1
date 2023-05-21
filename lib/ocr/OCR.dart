@@ -5,6 +5,7 @@ import 'package:uuid/uuid.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:app/main.dart';
+import 'package:app/audioutill/audioUtil.dart';
 
 void main() => runApp(OCRApp());
 
@@ -99,6 +100,7 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
+            AudioUtil.audioplay(); // 화면 전환 소리
             Navigator.pop(context);
           },
           icon: const Icon(Icons.arrow_back),
@@ -106,6 +108,7 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
         actions: [
           IconButton(
             onPressed: () {
+              AudioUtil.audioplay(); // 화면 전환 소리
               Navigator.popUntil(context, (route) => false);
               Navigator.push(
                 context,
@@ -116,39 +119,48 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // SizedBox(
+            //   height: 5,
+            //   width: 5,
+            // ),
+            Container(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   result,
                   textAlign: TextAlign.center,
                   style: const TextStyle(
                       fontSize: 50, fontWeight: FontWeight.bold),
+                )),
+            const SizedBox(
+              height: 50,
+            ),
+            SizedBox(
+              width: 200,
+              height: 50,
+              child: ElevatedButton(
+                onPressed: () {
+                  AudioUtil.audioplay(); // 화면 전환 소리
+                  getImage();
+                },
+                child: const Text(
+                  '사진 찍기',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
-              const SizedBox(
-                height: 50,
-              ),
-              SizedBox(
-                width: 200,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: () {
-                    getImage();
-                  },
-                  child: const Text(
-                    '사진 찍기',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              )
-            ],
-          ),
+            )
+
+            // ElevatedButton(
+            //   onPressed: () {
+            //     getImage();
+            //   },
+            //   child: Text('사진 찍기'),
+            // ),
+          ],
         ),
       ),
     );

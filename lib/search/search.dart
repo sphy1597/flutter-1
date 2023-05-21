@@ -1,6 +1,8 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:app/audioutill/audioUtil.dart';
+
 import 'package:app/main.dart';
 import 'searchPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,6 +74,7 @@ class _SearchPageState extends State<SearchApp> {
   }
 
   Future<void> getData() async {
+    AudioUtil.audioplay(); // 화면 전환 소리
     // 검색 버튼 눌렀을때
     loadSelectedAllergies();
     var url = Uri.parse(
