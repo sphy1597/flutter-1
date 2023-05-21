@@ -1,8 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:app/audioutill/audioUtil.dart';
-
 import 'package:app/main.dart';
 import 'searchPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,6 +15,9 @@ class SearchApp extends StatefulWidget {
 class _SearchPageState extends State<SearchApp> {
   final TextEditingController meName = TextEditingController();
   List<dynamic> itemList = []; // 의약품 리스트
+  final _prefsPregnancyKey = 'selectedPregnancy';
+  late SharedPreferences _prefsPregnancy;
+  int? _selectedPregnancy;
 
   Map<String, dynamic> allergies = {
     '해산물': false,
@@ -43,6 +44,12 @@ class _SearchPageState extends State<SearchApp> {
 
   void loadSelectedAllergies() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    _prefsPregnancy = await SharedPreferences.getInstance();
+
+    setState(() {
+      _selectedPregnancy = _prefsPregnancy.getInt(_prefsPregnancyKey) ?? 0;
+    });
+    await _prefsPregnancy.setInt(_prefsPregnancyKey, _selectedPregnancy ?? 0);
 
     setState(() {
       allergies = Map<String, dynamic>.from(prefs.getString('allergies') != null
@@ -70,11 +77,42 @@ class _SearchPageState extends State<SearchApp> {
               '뇌혈관질환': false,
             });
     });
-    print(allergies);
+    print(_selectedPregnancy);
+    print(allergies); // 테스트용 프린트
+  }
+
+  String? trueAllergies(Map<String, dynamic> allergies, item) {
+    String? result;
+    allergies.forEach((key, value) {
+      // 알러지 비교 후 result 에 해당하는 알러지 단어 누적
+      if (value == true) {
+        if (item['atpnQesitm'] != null && item['atpnQesitm'].contains(key) ||
+            item['atpnWarnQesitm'] != null &&
+                item['atpnWarnQesitm'].contains(key)) {
+          result = result != null ? result! + ', ' + key + ' ' : key + ' ';
+        }
+      }
+    });
+    if (_selectedPregnancy == 1) {
+      // 임산부 일 때, 임산부 임부 임신 3가지 단어 비교
+      if ((item['atpnQesitm'] != null && // 주의사항
+              (item['atpnQesitm'].contains("임산부") ||
+                  item['atpnQesitm'].contains("임부") ||
+                  item['atpnQesitm'].contains("임신") ||
+                  item['atpnQesitm'].contains("수유부"))) ||
+          (item['atpnWarnQesitm'] != null && // 주의사항경고
+              (item['atpnWarnQesitm'].contains("임산부") ||
+                  item['atpnQesitm'].contains("임부") ||
+                  item['atpnQesitm'].contains("임신") ||
+                  item['atpnQesitm'].contains("수유부")))) {
+        result = result != null ? result! + ', ' + "임산부" + ' ' : "임산부" + ' ';
+      }
+    }
+    print(result); // 테스트용 프린트
+    return result;
   }
 
   Future<void> getData() async {
-    AudioUtil.audioplay(); // 화면 전환 소리
     // 검색 버튼 눌렀을때
     loadSelectedAllergies();
     var url = Uri.parse(
@@ -87,7 +125,7 @@ class _SearchPageState extends State<SearchApp> {
     };
 
     var response = await http.get(url.replace(queryParameters: params));
-    print(response.body); // 테스트용 print
+    // print(response.body); // 테스트용 print
 
     final json = jsonDecode(response.body);
     setState(() {
@@ -100,48 +138,53 @@ class _SearchPageState extends State<SearchApp> {
         .map((item) => ElevatedButton(
             // 의약품 리스트대로 텍스트 버튼 생성
             onPressed: () {
-              print(allergies); // 알러지 배열 출력 테스트
-              print(item['atpnQesitm']); // 해당 의약품 주의사항 출력 테스트
-              // 의약품 터치했을 때
-              // 알러지의 true 값과 의약품의 주의사항경고 비교
-              // if (item['atpnWarnQesitm'] || item['atpnQesitm'])
-              // 참이면 showDialog경고창 띄우기
-              // else는 그냥 상세페이지 이동
-
-              showDialog(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("경고",
-                        style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold)),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ],
-                    ),
-
-                    // 어떤 거랑 겹치는지 Text 수정 예정
-                    actions: [
-                      TextButton(
-                        child: Text("확인"),
-                        onPressed: () {
-                          Navigator.pop(context); // 경고창 닫기
-                          Navigator.push(
-                              // 의약품 상세페이지로 이동
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      SearchPage(item: item)));
-                        },
+              String? result = trueAllergies(allergies, item);
+              if (result != null && result.isNotEmpty) {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("경고",
+                          style: TextStyle(
+                              fontSize: 30, fontWeight: FontWeight.bold)),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.bold)),
+                          Text(
+                            '{ ' + result + '}',
+                            style: TextStyle(fontSize: 20, color: Colors.red),
+                          ),
+                        ],
                       ),
-                    ],
-                  );
-                },
-              );
+
+                      // 어떤 거랑 겹치는지 Text 수정 예정
+                      actions: [
+                        TextButton(
+                          child: Text("확인"),
+                          onPressed: () {
+                            Navigator.pop(context); // 경고창 닫기
+                            Navigator.push(
+                                // 의약품 상세페이지로 이동
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        SearchPage(item: item)));
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              } else {
+                Navigator.push(
+                    // 의약품 상세페이지로 이동
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SearchPage(item: item)));
+              }
             },
             child: Container(
                 width: MediaQuery.of(context).size.width * 0.85, // 화면 크기의 85%
