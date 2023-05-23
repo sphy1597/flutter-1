@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 
-class searchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   final dynamic item;
 
-  searchPage({Key? key, required this.item}) : super(key: key);
+  const SearchPage({Key? key, required this.item}) : super(key: key);
 
+  @override
+  _SearchPageState createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +33,7 @@ class searchPage extends StatelessWidget {
             SizedBox(height: 25),
             // 약 이름
             Text(
-              item['itemName'],
+              widget.item['itemName'],
               style: TextStyle(
                 fontSize: 30.0,
                 color: Colors.black,
@@ -38,7 +43,7 @@ class searchPage extends StatelessWidget {
             SizedBox(height: 25),
 
             // 제조사
-            if (item['entpName'] != null)
+            if (widget.item['entpName'] != null)
               Center(
                 child: Container(
                   decoration: BoxDecoration(
@@ -48,7 +53,7 @@ class searchPage extends StatelessWidget {
                   padding: EdgeInsets.all(10.0), // 모든 방향으로 여백
                   width: MediaQuery.of(context).size.width * 0.90, // 화면의 90% 크기
                   child: Text(
-                    '제조사 : ' + item['entpName'],
+                    '제조사 : ' + widget.item['entpName'],
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -58,7 +63,7 @@ class searchPage extends StatelessWidget {
               ),
 
             // 효능
-            if (item['efcyQesitm'] != null)
+            if (widget.item['efcyQesitm'] != null)
               Center(
                 child: Column(
                   children: [
@@ -73,7 +78,7 @@ class searchPage extends StatelessWidget {
                           0.90, // 화면의 90% 크기
                       child: Text(
                         '효능 : ' +
-                            item['efcyQesitm']
+                            widget.item['efcyQesitm']
                                 .replaceAll(RegExp(r'<[^>]*>'), ""),
                         style: const TextStyle(
                           fontSize: 30,
@@ -86,7 +91,7 @@ class searchPage extends StatelessWidget {
               ),
 
             // 사용법
-            if (item['useMethodQesitm'] != null)
+            if (widget.item['useMethodQesitm'] != null)
               Center(
                 child: Column(
                   children: [
@@ -101,7 +106,7 @@ class searchPage extends StatelessWidget {
                           0.90, // 화면의 90% 크기
                       child: Text(
                         '사용법 : ' +
-                            item['useMethodQesitm']
+                            widget.item['useMethodQesitm']
                                 .replaceAll(RegExp(r'<[^>]*>'), ""),
                         style: const TextStyle(
                           fontSize: 30,
@@ -114,7 +119,7 @@ class searchPage extends StatelessWidget {
               ),
 
             // 주의사항경고
-            if (item['atpnWarnQesitm'] != null)
+            if (widget.item['atpnWarnQesitm'] != null)
               Center(
                 child: Column(
                   children: [
@@ -129,7 +134,7 @@ class searchPage extends StatelessWidget {
                           0.90, // 화면의 90% 크기
                       child: Text(
                         '주의사항경고 : ' +
-                            item['atpnWarnQesitm']
+                            widget.item['atpnWarnQesitm']
                                 .replaceAll(RegExp(r'<[^>]*>'), ""),
                         style: const TextStyle(
                           fontSize: 30,
@@ -142,7 +147,7 @@ class searchPage extends StatelessWidget {
               ),
 
             // 주의사항
-            if (item['atpnQesitm'] != null)
+            if (widget.item['atpnQesitm'] != null)
               Center(
                 child: Column(
                   children: [
@@ -157,7 +162,7 @@ class searchPage extends StatelessWidget {
                           0.90, // 화면의 90% 크기
                       child: Text(
                         '주의사항 : ' +
-                            item['atpnQesitm']
+                            widget.item['atpnQesitm']
                                 .replaceAll(RegExp(r'<[^>]*>'), ""),
                         style: const TextStyle(
                           fontSize: 30,
@@ -170,7 +175,7 @@ class searchPage extends StatelessWidget {
               ),
 
             // 상호작용
-            if (item['intrcQesitm'] != null)
+            if (widget.item['intrcQesitm'] != null)
               Center(
                 child: Column(
                   children: [
@@ -185,7 +190,7 @@ class searchPage extends StatelessWidget {
                           0.90, // 화면의 90% 크기
                       child: Text(
                         '상호작용 : ' +
-                            item['intrcQesitm']
+                            widget.item['intrcQesitm']
                                 .replaceAll(RegExp(r'<[^>]*>'), ""),
                         style: const TextStyle(
                           fontSize: 30,
@@ -198,7 +203,7 @@ class searchPage extends StatelessWidget {
               ),
 
             // 부작용
-            if (item['seQesitm'] != null)
+            if (widget.item['seQesitm'] != null)
               Center(
                 child: Column(
                   children: [
@@ -213,7 +218,8 @@ class searchPage extends StatelessWidget {
                           0.90, // 화면의 90% 크기
                       child: Text(
                         '부작용 : ' +
-                            item['seQesitm'].replaceAll(RegExp(r'<[^>]*>'), ""),
+                            widget.item['seQesitm']
+                                .replaceAll(RegExp(r'<[^>]*>'), ""),
                         style: const TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,
@@ -225,7 +231,7 @@ class searchPage extends StatelessWidget {
               ),
 
             // 보관방법
-            if (item['depositMethodQesitm'] != null)
+            if (widget.item['depositMethodQesitm'] != null)
               Center(
                 child: Column(
                   children: [
@@ -240,7 +246,7 @@ class searchPage extends StatelessWidget {
                           0.90, // 화면의 90% 크기
                       child: Text(
                         '보관방법 : ' +
-                            item['depositMethodQesitm']
+                            widget.item['depositMethodQesitm']
                                 .replaceAll(RegExp(r'<[^>]*>'), ""),
                         style: const TextStyle(
                           fontSize: 30,
