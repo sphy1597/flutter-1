@@ -45,10 +45,10 @@ class MyButton extends StatelessWidget {
           title: const Text(
             '약리미',
             style: TextStyle(
-              fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
+            textScaleFactor: 1.5,
           ),
           centerTitle: true,
         ),
@@ -90,13 +90,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              'QR코드 검색',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/qr_code.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        'QR코드 검색',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -123,13 +140,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '이미지 검색',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/pill.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '이미지 검색',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -163,13 +197,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '약 검색',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/search.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '약 검색',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -201,13 +252,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '글자 인식',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/ocr.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '글자 인식',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -241,13 +309,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '복용 알림',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/alarm.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '복용 알림',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
@@ -278,13 +363,30 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 // padding: const EdgeInsets.all(10),
                                 elevation: 0.0),
-                            child: const Text(
-                              '검색 기록',
-                              style: TextStyle(
-                                fontSize: 26.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Padding(
+                                padding: const EdgeInsets.fromLTRB(0, 30, 0, 30),
+                                child: Column(
+                                  children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                        image: AssetImage('assets/images/history.png'),
+                                        width: 40.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.zero,
+                                      child: Text(
+                                        '검색 기록',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold
+                                        ),
+                                        textScaleFactor: 1.5,
+                                      ),
+                                    ),
+                                  ],
+                                )
                             ),
                           ),
                         ),
