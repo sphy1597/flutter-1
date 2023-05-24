@@ -114,37 +114,6 @@ class _SearchPageState extends State<SearchApp> {
     return result;
   }
 
-  String? trueAllergies(Map<String, dynamic> allergies, item) {
-    String? result;
-    allergies.forEach((key, value) {
-      // 알러지 비교 후 result 에 해당하는 알러지 단어 누적
-      if (value == true) {
-        if (item['atpnQesitm'] != null && item['atpnQesitm'].contains(key) ||
-            item['atpnWarnQesitm'] != null &&
-                item['atpnWarnQesitm'].contains(key)) {
-          result = result != null ? result! + ', ' + key + ' ' : key + ' ';
-        }
-      }
-    });
-    if (_selectedPregnancy == 1) {
-      // 임산부 일 때, 임산부 임부 임신 3가지 단어 비교
-      if ((item['atpnQesitm'] != null && // 주의사항
-              (item['atpnQesitm'].contains("임산부") ||
-                  item['atpnQesitm'].contains("임부") ||
-                  item['atpnQesitm'].contains("임신") ||
-                  item['atpnQesitm'].contains("수유부"))) ||
-          (item['atpnWarnQesitm'] != null && // 주의사항경고
-              (item['atpnWarnQesitm'].contains("임산부") ||
-                  item['atpnQesitm'].contains("임부") ||
-                  item['atpnQesitm'].contains("임신") ||
-                  item['atpnQesitm'].contains("수유부")))) {
-        result = result != null ? result! + ', ' + "임산부" + ' ' : "임산부" + ' ';
-      }
-    }
-    // print(result); // 알러지 및 임신여부 테스트용
-    return result;
-  }
-
   Future<void> getData() async {
     // 검색 버튼 눌렀을때
     loadSelectedAllergies();
