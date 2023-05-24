@@ -1,5 +1,5 @@
+import 'package:app/search/searchHistory.dart';
 import 'package:flutter/material.dart';
-
 import 'package:app/ocr/OCR.dart';
 import 'package:app/search/search.dart';
 import 'package:app/qr/qr.dart';
@@ -349,6 +349,10 @@ class MyButton extends StatelessWidget {
                             onPressed: () {
                               AudioUtil.audioplay();
                               print('검색 기록 button');
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchHistory()));
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor:
