@@ -76,10 +76,10 @@ class _AlarmWidgetState extends State<AlarmWidget> {
         title: const Text(
           '복용 알람 ',
           style: TextStyle(
-            fontSize: 30.0,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
+          textScaleFactor: 1.5,
         ),
         centerTitle: true,
         leading: IconButton(

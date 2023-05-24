@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app/audioutill/audioUtil.dart';
 import 'package:app/main.dart';
 import 'package:app/qr/qrcamera.dart';
+import 'package:url_launcher/url_launcher.dart'; // 패키지
 
 class QRcodeWidget extends StatefulWidget {
   const QRcodeWidget({Key? key}) : super(key: key);
@@ -80,8 +81,8 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
                               String receive = value;
                               print('전달받은 값 : $receive');
 
-                              List<String> data = receive.split('//');
-                              if (data[0] == "medieyes") {
+                              List<String> data = receive.split('/');
+                              if (data[0] == "medieye:") {
                                 setState(() {
                                   name = data[1];
                                   howeat = data[2];
@@ -90,6 +91,8 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
                                 });
                               } else if (data[0] == "http:" ||
                                   data[0] == "https:") {
+                                Uri _url = Uri.parse(receive);
+                                _launchUrl(_url);
                               } else {}
                             });
                           },
@@ -198,5 +201,11 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
                 ],
               ),
             )));
+  }
+
+  Future<void> _launchUrl(_url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
+    }
   }
 }

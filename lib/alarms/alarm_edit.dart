@@ -54,11 +54,19 @@ class _AlarmEditState extends State<AlarmEdit> {
     final res = await TimePicker.show(
         context: context,
         sheet: TimePickerSheet(
-            minuteInterval: 1,
-            sheetTitle: '시간설정',
-            minuteTitle: '분',
-            hourTitle: '시',
-            saveButtonText: '저장'));
+          minuteInterval: 1,
+          sheetTitle: '시간설정',
+          minuteTitle: '분',
+          hourTitle: '시',
+          saveButtonText: '저장',
+          saveButtonColor: Colors.orange,
+          sheetCloseIconColor: Colors.orange,
+          hourTitleStyle: TextStyle(color: Colors.orange, fontSize: 22),
+          minuteTitleStyle: TextStyle(color: Colors.orange, fontSize: 22),
+          wheelNumberSelectedStyle:
+              TextStyle(color: Colors.orange, fontSize: 24),
+          wheelNumberItemStyle: TextStyle(fontSize: 20),
+        ));
     if (res != null)
       setState(() {
         selectedTime = TimeOfDay(hour: res.hour, minute: res.minute);
@@ -136,7 +144,7 @@ class _AlarmEditState extends State<AlarmEdit> {
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
-                      .copyWith(color: Colors.blueAccent),
+                      .copyWith(color: Colors.orange),
                 ),
               ),
               TextButton(
@@ -146,7 +154,7 @@ class _AlarmEditState extends State<AlarmEdit> {
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
-                      .copyWith(color: Colors.blueAccent),
+                      .copyWith(color: Colors.orange),
                 ),
               ),
             ],
@@ -161,7 +169,7 @@ class _AlarmEditState extends State<AlarmEdit> {
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium!
-                    .copyWith(color: Colors.blueAccent),
+                    .copyWith(color: Colors.orange),
               ),
             ),
           ),
