@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:app/main.dart';
 import 'searchPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'searchHistory.dart';
 
 void main() => runApp(SearchApp());
 
@@ -13,6 +14,7 @@ class SearchApp extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchApp> {
+  SearchHistory searchHistory = SearchHistory();
   final TextEditingController meName = TextEditingController();
   List<dynamic> itemList = []; // 의약품 리스트
   final _prefsPregnancyKey = 'selectedPregnancy';
@@ -77,8 +79,8 @@ class _SearchPageState extends State<SearchApp> {
               '뇌혈관질환': false,
             });
     });
-    print(_selectedPregnancy);
-    print(allergies); // 테스트용 프린트
+    // print(_selectedPregnancy); // 임신 여부 테스트용
+    // print(allergies); // 테스트용 프린트
   }
 
   String? trueAllergies(Map<String, dynamic> allergies, item) {
@@ -108,7 +110,7 @@ class _SearchPageState extends State<SearchApp> {
         result = result != null ? result! + ', ' + "임산부" + ' ' : "임산부" + ' ';
       }
     }
-    print(result); // 테스트용 프린트
+    // print(result); // 알러지 및 임신여부 테스트용
     return result;
   }
 
@@ -130,6 +132,7 @@ class _SearchPageState extends State<SearchApp> {
     final json = jsonDecode(response.body);
     setState(() {
       itemList = json['body']['items']; // 리스트에 저장
+      print(json['body']['items']); // 테스트용 print
     });
   }
 
@@ -138,29 +141,29 @@ class _SearchPageState extends State<SearchApp> {
         .map((item) => ElevatedButton(
             // 의약품 리스트대로 텍스트 버튼 생성
             onPressed: () {
+              SearchHistory.saveSearchRecord(item['itemName']);
               String? result = trueAllergies(allergies, item);
               if (result != null && result.isNotEmpty) {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("경고",
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.bold)),
+                      title: const Text(
+                        "경고",
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        textScaleFactor: 1.5,
+                      ),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          Text(
-                            '{ ' + result + '}',
-                            style: TextStyle(fontSize: 20, color: Colors.red),
-                          ),
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                              textScaleFactor: 1.1),
+                          Text('{ ' + result + '}',
+                              style: const TextStyle(color: Colors.red),
+                              textScaleFactor: 1.5),
                         ],
                       ),
-
-                      // 어떤 거랑 겹치는지 Text 수정 예정
                       actions: [
                         TextButton(
                           child: Text("확인"),
@@ -186,18 +189,22 @@ class _SearchPageState extends State<SearchApp> {
                         builder: (context) => SearchPage(item: item)));
               }
             },
-            child: Container(
-                width: MediaQuery.of(context).size.width * 0.85, // 화면 크기의 85%
-                child: Text(
-                  item['itemName'], // 의약품 이름으로 Text 설정
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-                )),
             style: ElevatedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(32.0),
-              ),
-            )))
+                backgroundColor: Color.fromRGBO(255, 242, 204, 1),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                side: BorderSide(width: 1.2, color: Colors.grey)),
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width * 0.85, // 화면 크기의 85%
+                child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                    child: Text(
+                      item['itemName'], // 의약품 이름으로 Text 설정
+                      textAlign: TextAlign.left,
+                      // style: TextStyle(fontWeight: FontWeight.bold),
+                      textScaleFactor: 1.2,
+                    )))))
         .expand((button) => [button, SizedBox(height: 20)]) // 버튼 간격
         .toList();
   }
@@ -209,10 +216,10 @@ class _SearchPageState extends State<SearchApp> {
         title: const Text(
           '약 검색',
           style: TextStyle(
-            fontSize: 30.0,
             color: Colors.black,
             fontWeight: FontWeight.bold,
           ),
+          textScaleFactor: 1.5,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -234,37 +241,45 @@ class _SearchPageState extends State<SearchApp> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          TextFormField(
-            // 검색필드
-            controller: meName,
-            decoration: const InputDecoration(
-              labelText: '약 이름을 작성해주세요',
-            ),
-          ),
-          ElevatedButton(
-            // 검색 버튼
-            onPressed: getData,
-            child: const Text(
-              '검색',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(
-            // 검색 버튼아래에 빈공간 만들기
-            height: 20,
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: buildItemListButtons(),
+      body: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              TextFormField(
+                // 검색필드
+                controller: meName,
+                decoration: const InputDecoration(
+                  labelText: '약 이름을 작성해주세요',
+                ),
               ),
-            ),
-          ),
-        ],
-      ),
+              Padding(
+                  padding: EdgeInsets.fromLTRB(0, 5, 0, 20),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: ElevatedButton(
+                      // 검색 버튼
+                      onPressed: getData,
+                      child: const Text(
+                        '검색',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                        textScaleFactor: 1.5,
+                      ),
+                    ),
+                  )),
+              // const SizedBox(
+              //   // 검색 버튼아래에 빈공간 만들기
+              //   height: 20,
+              // ),
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: buildItemListButtons(),
+                  ),
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
