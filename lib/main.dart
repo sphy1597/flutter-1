@@ -65,13 +65,21 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text(
-            '약리미',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-            textScaleFactor: 1.5,
+          title:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                  'assets/images/medieyes.png', fit: BoxFit.contain, height: 32),
+              const Text(
+                '  약리미',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+                textScaleFactor: 1.5,
+              ),
+            ],
           ),
           centerTitle: true,
         ),
