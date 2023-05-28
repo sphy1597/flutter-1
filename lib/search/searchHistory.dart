@@ -183,14 +183,18 @@ class _SearchHistoryState extends State<SearchHistory> {
                 Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
                     style: TextStyle(fontWeight: FontWeight.bold),
                     textScaleFactor: 1.1),
-                Text('{ ' + result + '}',
+                Text('" ' + result.trim() + ' "ㄲ',
                     style: const TextStyle(color: Colors.red),
                     textScaleFactor: 1.5),
               ],
             ),
             actions: [
               TextButton(
-                child: Text("확인"),
+                child: const Text("확인",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 113, 201, 206),
+                    )),
                 onPressed: () {
                   Navigator.pop(context); // 경고창 닫기
                   Navigator.push(
@@ -215,23 +219,24 @@ class _SearchHistoryState extends State<SearchHistory> {
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Search History',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+          primarySwatch: ColorService.createMaterialColor(const Color(0xFFA6E3E9)),
+          fontFamily: "Cafe24"
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text(
+          title: const Text(
             '검색 기록',
             style: TextStyle(
-              fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
-            ),
+            ), textScaleFactor: 1.2,
           ),
           centerTitle: true,
           leading: IconButton(
@@ -272,16 +277,19 @@ class _SearchHistoryState extends State<SearchHistory> {
                         color: Colors.grey,
                         width: 1.0,
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    margin: EdgeInsets.all(8.0),
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: ListTile(
-                      title: Text(
-                        searchRecord,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
+                      title: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                        child: Text(
+                          searchRecord,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              height: 1.4
+                          ), textScaleFactor: 1.0,
                         ),
                       ),
                       trailing: IconButton(
@@ -304,5 +312,27 @@ class _SearchHistoryState extends State<SearchHistory> {
         ),
       ),
     );
+  }
+}
+
+class ColorService {
+  static MaterialColor createMaterialColor(Color color) {
+    List strengths = <double>[.05];
+    Map<int, Color> swatch = {};
+    final int r = color.red, g = color.green, b = color.blue;
+
+    for (int i = 1; i < 10; i++) {
+      strengths.add(0.1 * i);
+    }
+    for (var strength in strengths) {
+      final double ds = 0.5 - strength;
+      swatch[(strength * 1000).round()] = Color.fromRGBO(
+        r + ((ds < 0 ? r : (255 - r)) * ds).round(),
+        g + ((ds < 0 ? g : (255 - g)) * ds).round(),
+        b + ((ds < 0 ? b : (255 - b)) * ds).round(),
+        1,
+      );
+    }
+    return MaterialColor(color.value, swatch);
   }
 }

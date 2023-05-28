@@ -26,7 +26,7 @@ class _UserInfoState extends State<UserInfo> {
   int? _selectedGender;
   int _selectedYear = 0;
   int? _selectedPregnancy;
-  final Color? _selectedBackColor = Colors.orangeAccent[100];
+  final Color _selectedBackColor = const Color.fromARGB(255, 203, 241, 245);
 
   List<String> yearsList = List.generate(94, (index) => "${2023 - index}년");
   static const double _kItemExtent = 32.0;
@@ -123,10 +123,9 @@ class _UserInfoState extends State<UserInfo> {
           title: const Text(
             '개인 기본정보',
             style: TextStyle(
-              fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.bold,
-            ),
+            ), textScaleFactor: 1.2,
           ),
           centerTitle: true,
           leading: IconButton(

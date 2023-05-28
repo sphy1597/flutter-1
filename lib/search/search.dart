@@ -5,6 +5,7 @@ import 'package:app/main.dart';
 import 'searchPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'searchHistory.dart';
+import 'package:app/audioutill/audioUtil.dart';
 
 void main() => runApp(SearchApp());
 
@@ -159,16 +160,21 @@ class _SearchPageState extends State<SearchApp> {
                           Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
                               style: TextStyle(fontWeight: FontWeight.bold),
                               textScaleFactor: 1.1),
-                          Text('{ ' + result + '}',
+                          Text('" ' + result.trim() + ' "',
                               style: const TextStyle(color: Colors.red),
                               textScaleFactor: 1.5),
                         ],
                       ),
                       actions: [
                         TextButton(
-                          child: Text("확인"),
+                          child: const Text("확인",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Color.fromARGB(255, 113, 201, 206),
+                          )),
                           onPressed: () {
                             Navigator.pop(context); // 경고창 닫기
+                            AudioUtil.audioplay(); // 화면 전환 소리
                             Navigator.push(
                                 // 의약품 상세페이지로 이동
                                 context,
@@ -182,6 +188,7 @@ class _SearchPageState extends State<SearchApp> {
                   },
                 );
               } else {
+                AudioUtil.audioplay(); // 화면 전환 소리
                 Navigator.push(
                     // 의약품 상세페이지로 이동
                     context,
@@ -218,8 +225,7 @@ class _SearchPageState extends State<SearchApp> {
           style: TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
-          ),
-          textScaleFactor: 1.5,
+          ), textScaleFactor: 1.2,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -232,6 +238,7 @@ class _SearchPageState extends State<SearchApp> {
           IconButton(
             onPressed: () {
               Navigator.popUntil(context, (route) => false);
+              AudioUtil.audioplay(); // 화면 전환 소리
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const MyApp()),
@@ -245,11 +252,15 @@ class _SearchPageState extends State<SearchApp> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
+              Text(
+                "약 이름을 작성해주세요.",
+                textScaleFactor: 1.3,
+              ),
               TextFormField(
                 // 검색필드
                 controller: meName,
                 decoration: const InputDecoration(
-                  labelText: '약 이름을 작성해주세요',
+                  labelText: '',
                 ),
               ),
               Padding(
