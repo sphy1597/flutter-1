@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app/main.dart';
 
 class SearchPage extends StatefulWidget {
   final dynamic item;
@@ -19,7 +20,25 @@ class _SearchPageState extends State<SearchPage> {
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
-            textScaleFactor: 1.5),
+            textScaleFactor: 1.2),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.popUntil(context, (route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+            },
+            icon: const Icon(Icons.home),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
