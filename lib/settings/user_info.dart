@@ -124,8 +124,8 @@ class _UserInfoState extends State<UserInfo> {
             '개인 기본정보',
             style: TextStyle(
               color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ), textScaleFactor: 1.2,
+              fontWeight: FontWeight.bold),
+            textScaleFactor: 1.2,
           ),
           centerTitle: true,
           leading: IconButton(
@@ -165,10 +165,8 @@ class _UserInfoState extends State<UserInfo> {
                           alignment: Alignment.topLeft,
                           child: Text(
                             '시각장애인 여부',
-                            style: TextStyle(
-                              fontSize: 25.0,
-                              color: Colors.black,
-                            ),
+                            style: TextStyle(color: Colors.black),
+                            textScaleFactor: 1.4,
                             textAlign: TextAlign.left,
                           ),
                         ),
@@ -192,11 +190,9 @@ class _UserInfoState extends State<UserInfo> {
                                       onChanged: _saveSelectedVisualImpairment,
                                     ),
                                     const Text(
-                                      '예',
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.black,
-                                      ),
+                                        '예',
+                                        style:TextStyle(color: Colors.black),
+                                        textScaleFactor: 1.2
                                     ),
                                   ],
                                 ),
@@ -220,11 +216,9 @@ class _UserInfoState extends State<UserInfo> {
                                       onChanged: _saveSelectedVisualImpairment,
                                     ),
                                     const Text(
-                                      '아니오',
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.black,
-                                      ),
+                                        '아니오',
+                                        style: TextStyle(color: Colors.black),
+                                        textScaleFactor: 1.2
                                     ),
                                   ],
                                 ),
@@ -239,10 +233,8 @@ class _UserInfoState extends State<UserInfo> {
                               alignment: Alignment.topLeft,
                               child: Text(
                                   '성별',
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: Colors.black,
-                                  ),
+                                  style: TextStyle(color: Colors.black),
+                                  textScaleFactor: 1.2,
                                   textAlign: TextAlign.left
                               )
                           )
@@ -253,7 +245,7 @@ class _UserInfoState extends State<UserInfo> {
                             child: GestureDetector(
                               onTap: () {
                                 _saveSelectedGender(1);
-                              },
+                                },
                               child: Container(
                                 color: _selectedGender == 1
                                     ? _selectedBackColor
@@ -266,16 +258,14 @@ class _UserInfoState extends State<UserInfo> {
                                       onChanged: _saveSelectedGender,
                                     ),
                                     const Text(
-                                      '남자',
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                                        '남자',
+                                        style: TextStyle(color: Colors.black),
+                                        textScaleFactor: 1.2
+                                    )
+                                  ]
+                                )
+                              )
+                            )
                           ),
                           Expanded(
                             child: GestureDetector(
@@ -294,18 +284,16 @@ class _UserInfoState extends State<UserInfo> {
                                       onChanged: _saveSelectedGender,
                                     ),
                                     const Text(
-                                      '여자',
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                                        '여자',
+                                        style: TextStyle(color: Colors.black),
+                                        textScaleFactor: 1.2
+                                    )
+                                  ]
+                                )
+                              )
+                            )
+                          )
+                        ]
                       ),
                       const Padding(
                           padding: EdgeInsets.fromLTRB(10, 10, 0, 10),
@@ -313,10 +301,8 @@ class _UserInfoState extends State<UserInfo> {
                               alignment: Alignment.topLeft,
                               child: Text(
                                   '생년',
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: Colors.black,
-                                  ),
+                                  style: TextStyle(color: Colors.black),
+                                  textScaleFactor: 1.4,
                                   textAlign: TextAlign.left
                               )
                           )
@@ -349,10 +335,8 @@ class _UserInfoState extends State<UserInfo> {
                         ),
                         // This displays the selected fruit name.
                         child: Text(
-                          yearsList[_selectedYear],
-                          style: const TextStyle(
-                            fontSize: 22.0,
-                          ),
+                            yearsList[_selectedYear],
+                            textScaleFactor: 1.2
                         ),
                       ),
                       const Padding(
@@ -361,10 +345,8 @@ class _UserInfoState extends State<UserInfo> {
                               alignment: Alignment.topLeft,
                               child: Text(
                                   '임신여부',
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: Colors.black,
-                                  ),
+                                  style: TextStyle(color: Colors.black),
+                                  textScaleFactor: 1.4,
                                   textAlign: TextAlign.left
                               )
                           )
@@ -388,16 +370,14 @@ class _UserInfoState extends State<UserInfo> {
                                       onChanged: _saveSelectedPregnancy,
                                     ),
                                     const Text(
-                                      '예',
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
+                                        '예',
+                                        style: TextStyle(color: Colors.black),
+                                        textScaleFactor: 1.2
+                                    )
+                                  ]
+                                )
+                              )
+                            )
                           ),
                           Expanded(
                             child: GestureDetector(
@@ -416,21 +396,19 @@ class _UserInfoState extends State<UserInfo> {
                                       onChanged: _saveSelectedPregnancy,
                                     ),
                                     const Text(
-                                      '아니오',
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.black,
-                                      ),
+                                        '아니오',
+                                        style: TextStyle(color: Colors.black),
+                                        textScaleFactor: 1.2
                                     ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                                  ]
+                                )
+                              )
+                            )
+                          )
+                        ]
+                      )
+                    ]
+                  )
                 )
             )
         )

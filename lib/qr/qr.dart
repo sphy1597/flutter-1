@@ -22,47 +22,46 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text(
-            ' QR코드 검색',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ), textScaleFactor: 1.2,
-          ),
-          centerTitle: true,
-          leading: IconButton(
+      appBar: AppBar(
+        title: const Text(
+          ' QR코드 검색',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ), textScaleFactor: 1.2,
+        ),
+        centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            AudioUtil.audioplay();
+            Navigator.pop(context);
+            },
+          icon: const Icon(Icons.arrow_back),
+        ),
+        actions: [
+          IconButton(
             onPressed: () {
               AudioUtil.audioplay();
-              Navigator.pop(context);
-            },
-            icon: const Icon(Icons.arrow_back),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                AudioUtil.audioplay();
-                Navigator.popUntil(context, (route) => false);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyApp()),
-                );
+              Navigator.popUntil(context, (route) => false);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyApp()));
               },
-              icon: const Icon(Icons.home),
-            ),
-          ],
-        ),
-        body: SingleChildScrollView(
-            physics: const FixedExtentScrollPhysics(),
-            // physics: NeverScrollableScrollPhysics(),
-            child: Container(
+            icon: const Icon(Icons.home),
+          ),
+        ],
+      ),
+      body: SingleChildScrollView(
+          physics: const FixedExtentScrollPhysics(),
+          // physics: NeverScrollableScrollPhysics(),
+          child: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height * 1,
               decoration: const BoxDecoration(
                 color: Colors.white,
               ),
               child: Padding(
-                padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20),
                   child: Align(
                     alignment: const AlignmentDirectional(0, 0),
                     child: Column(
@@ -84,41 +83,23 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(width: 1.4, color: Colors.grey)),
                               padding: const EdgeInsets.all(10.0), // 모든 방향으로 여백
-                              width: MediaQuery.of(context).size.width *
-                                  0.90, // 화면의 90% 크기
-                              child: Column(children: [
-                                const Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: Text('복용법',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                        textScaleFactor: 1.5)),
-                                Text(
-                                    howeat.trim(),
-                                    style: const TextStyle(height: 1.4),
-                                    textScaleFactor: 1.2),
-                              ])),
+                              width: MediaQuery.of(context).size.width * 0.90, // 화면의 90% 크기
+                              child: Column(
+                                  children: [
+                                    const Padding(
+                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                        child: Text('복용법',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                            textScaleFactor: 1.5)),
+                                    Text(
+                                        howeat.trim(),
+                                        style: const TextStyle(height: 1.4),
+                                        textScaleFactor: 1.2)
+                                  ]
+                              )
+                          ),
                         ),
-                        // 복용법
-                        // Expanded(
-                        //   // 복용법
-                        //   flex: 2,
-                        //   child: Padding(
-                        //       padding: EdgeInsets.all(8),
-                        //       child: Container(
-                        //           width: double.infinity,
-                        //           decoration: BoxDecoration(
-                        //               borderRadius: BorderRadius.circular(10),
-                        //               color: Color.fromRGBO(243, 232, 255, 1)),
-                        //           child: Center(
-                        //             child: Text(
-                        //               howeat, // 복용법
-                        //               style: TextStyle(
-                        //                 fontSize: 20,
-                        //               ),
-                        //             ),
-                        //           ))),
-                        // ),
                         //효능
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
@@ -128,41 +109,23 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(width: 1.4, color: Colors.grey)),
                               padding: const EdgeInsets.all(10.0), // 모든 방향으로 여백
-                              width: MediaQuery.of(context).size.width *
-                                  0.90, // 화면의 90% 크기
-                              child: Column(children: [
-                                const Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: Text('효능',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                        textScaleFactor: 1.5)),
-                                Text(
-                                    effect.trim(),
-                                    style: const TextStyle(height: 1.4),
-                                    textScaleFactor: 1.2),
-                              ])),
+                              width: MediaQuery.of(context).size.width * 0.90, // 화면의 90% 크기
+                              child: Column(
+                                  children: [
+                                    const Padding(
+                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                        child: Text('효능',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                            textScaleFactor: 1.5)),
+                                    Text(
+                                        effect.trim(),
+                                        style: const TextStyle(height: 1.4),
+                                        textScaleFactor: 1.2),
+                                  ]
+                              )
+                          ),
                         ),
-                        // Expanded(
-                        //     //효능
-                        //     flex: 2,
-                        //     child: Padding(
-                        //       padding: EdgeInsets.all(8),
-                        //       child: Container(
-                        //         width: double.infinity,
-                        //         decoration: BoxDecoration(
-                        //             borderRadius: BorderRadius.circular(10),
-                        //             color: Color.fromRGBO(220, 250, 210, 1)),
-                        //         child: Center(
-                        //           child: Text(
-                        //             effect, // 복용법
-                        //             style: TextStyle(
-                        //               fontSize: 20,
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     )),
                         //주의사항
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 0, 0, 15),
@@ -172,86 +135,65 @@ class _QRcodeWidgetState extends State<QRcodeWidget> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   border: Border.all(width: 1.4, color: Colors.grey)),
                               padding: const EdgeInsets.all(10.0), // 모든 방향으로 여백
-                              width: MediaQuery.of(context).size.width *
-                                  0.90, // 화면의 90% 크기
-                              child: Column(children: [
-                                const Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                                    child: Text('주의사항',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(fontWeight: FontWeight.bold),
-                                        textScaleFactor: 1.5)),
-                                Text(
-                                    becareful.trim(),
-                                    style: const TextStyle(height: 1.4),
-                                    textScaleFactor: 1.2),
-                              ])),
+                              width: MediaQuery.of(context).size.width * 0.90, // 화면의 90% 크기
+                              child: Column(
+                                  children: [
+                                    const Padding(
+                                        padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                                        child: Text('주의사항',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(fontWeight: FontWeight.bold),
+                                            textScaleFactor: 1.5)),
+                                    Text(
+                                        becareful.trim(),
+                                        style: const TextStyle(height: 1.4),
+                                        textScaleFactor: 1.2)
+                                  ]
+                              )
+                          ),
                         ),
-                        // Expanded(
-                        //     //주의사항
-                        //     flex: 2,
-                        //     child: Padding(
-                        //       padding: EdgeInsets.all(8),
-                        //       child: Container(
-                        //         width: double.infinity,
-                        //         decoration: BoxDecoration(
-                        //             borderRadius: BorderRadius.circular(10),
-                        //             color: Color.fromRGBO(230, 230, 230, 1)),
-                        //         child: Padding(
-                        //           padding: EdgeInsets.all(10),
-                        //           child: Center(
-                        //             child: Text(
-                        //               becareful, //주의사항
-                        //               style: TextStyle(
-                        //                 fontSize: 20,
-                        //               ),
-                        //             ),
-                        //           ),
-                        //         ),
-                        //       ),
-                        //     )),
                       ],
                     ),
-            )))),
-        bottomNavigationBar: BottomAppBar(
-          child: SizedBox(
-              height: 56.0,
-              child: ElevatedButton(
-                onPressed: () {
-                  print('카메라 사용하기 button');
-                  AudioUtil.audioplay();
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const QRcameraWidget()),
-                  ).then((value) {
-                    String receive = value;
-                    print('전달받은 값 : $receive');
-
-                    List<String> data = receive.split('/');
-                    if (data[0] == "medieye:") {
-                      setState(() {
-                        name = data[1];
-                        howeat = data[2];
-                        effect = data[3];
-                        becareful = data[4];
-                      });
-                    } else if (data[0] == "http:" ||
-                        data[0] == "https:") {
-                      Uri _url = Uri.parse(receive);
-                      _launchUrl(_url);
-                    } else {}
-                  });
-                },
-                child: const Text(
-                  '카메라 사용하기',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ), textScaleFactor: 1.5
-                ),
-              ),
+                  )
+              )
           )
-        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+          child: SizedBox(
+            height: 56.0,
+            child: ElevatedButton(
+              onPressed: () {
+                print('카메라 사용하기 button');
+                AudioUtil.audioplay();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const QRcameraWidget())).then((value) {
+                        String receive = value;
+                        print('전달받은 값 : $receive');
+                        List<String> data = receive.split('/');
+                        if (data[0] == "medieye:") {
+                          setState(() {
+                            name = data[1];
+                            howeat = data[2];
+                            effect = data[3];
+                            becareful = data[4];
+                          });
+                        } else if (data[0] == "http:" ||
+                            data[0] == "https:") {
+                          Uri _url = Uri.parse(receive);
+                          _launchUrl(_url);
+                        } else {}
+                      });
+                },
+              child: const Text(
+                  '카메라 사용하기',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                  textScaleFactor: 1.5
+              )
+            )
+          )
+      )
     );
   }
 

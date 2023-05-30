@@ -69,7 +69,8 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
               child: QRView(
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
-              )),
+              )
+          ),
           Expanded(
               flex: 2,
               child: Center(
@@ -81,7 +82,8 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
                     textAlign: TextAlign.center,
                   ),
                 )
-              )),
+              )
+          ),
         ],
       ),
     );

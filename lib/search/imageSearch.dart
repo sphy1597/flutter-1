@@ -248,8 +248,8 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
           '이미지 검색',
           style: TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ), textScaleFactor: 1.2,
+            fontWeight: FontWeight.bold),
+          textScaleFactor: 1.2,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -289,19 +289,18 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
       //     ),
       //   ),
       // ),
-      body: Padding(
-            padding: const EdgeInsets.all(25),
-            child: Center(
-              child: const Text(
+      body: const Padding(
+          padding: EdgeInsets.all(25),
+          child: Center(
+              child: Text(
                   "약을 손바닥 위나 검정색을 배경으로 촬영해주세요.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      height: 1.4
-                  ),
+                      height: 1.4),
                   textScaleFactor: 1.3
               )
-            )
+          )
       ),
       bottomNavigationBar: BottomAppBar(
           child: SizedBox(
@@ -312,9 +311,9 @@ class ImageSelectionScreenState extends State<ImageSelectionScreen> {
                   getImage();
                 },
                 child: const Text(
-                  '사진 찍기',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    '카메라 사용하기',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textScaleFactor: 1.5
                 ),
               )
           )

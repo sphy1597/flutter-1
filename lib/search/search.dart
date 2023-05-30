@@ -157,7 +157,7 @@ class _SearchPageState extends State<SearchApp> {
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
+                          const Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
                               style: TextStyle(fontWeight: FontWeight.bold),
                               textScaleFactor: 1.1),
                           Text('" ' + result.trim() + ' "',
@@ -168,10 +168,11 @@ class _SearchPageState extends State<SearchApp> {
                       actions: [
                         TextButton(
                           child: const Text("확인",
-                            style: TextStyle(
+                              style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Color.fromARGB(255, 113, 201, 206),
-                          )),
+                              )
+                          ),
                           onPressed: () {
                             Navigator.pop(context); // 경고창 닫기
                             AudioUtil.audioplay(); // 화면 전환 소리
@@ -194,26 +195,27 @@ class _SearchPageState extends State<SearchApp> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => SearchPage(item: item)));
-              }
-            },
-            style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromRGBO(255, 242, 204, 1),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                side: BorderSide(width: 1.2, color: Colors.grey)),
-            child: SizedBox(
-                width: MediaQuery.of(context).size.width * 0.85, // 화면 크기의 85%
-                child: Padding(
-                    padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                    child: Text(
-                      item['itemName'], // 의약품 이름으로 Text 설정
-                      textAlign: TextAlign.left,
-                      // style: TextStyle(fontWeight: FontWeight.bold),
-                      textScaleFactor: 1.2,
-                    )))))
-        .expand((button) => [button, SizedBox(height: 20)]) // 버튼 간격
-        .toList();
+              }},
+        style: ElevatedButton.styleFrom(
+            backgroundColor: const Color.fromRGBO(255, 242, 204, 1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            side: const BorderSide(width: 1.2, color: Colors.grey)),
+        child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.85, // 화면 크기의 85%
+            child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 15, 0, 15),
+                child: Text(
+                  item['itemName'], // 의약품 이름으로 Text 설정
+                  textAlign: TextAlign.left,
+                  textScaleFactor: 1.2,
+                )
+            )
+        )
+    )
+    ).expand((button) => [button, const SizedBox(height: 20)]) // 버튼 간격
+    .toList();
   }
 
   @override
@@ -224,8 +226,8 @@ class _SearchPageState extends State<SearchApp> {
           '약 검색',
           style: TextStyle(
             color: Colors.black,
-            fontWeight: FontWeight.bold,
-          ), textScaleFactor: 1.2,
+            fontWeight: FontWeight.bold),
+          textScaleFactor: 1.2,
         ),
         centerTitle: true,
         leading: IconButton(
@@ -252,7 +254,7 @@ class _SearchPageState extends State<SearchApp> {
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
-              Text(
+              const Text(
                 "약 이름을 작성해주세요.",
                 textScaleFactor: 1.3,
               ),
@@ -264,7 +266,7 @@ class _SearchPageState extends State<SearchApp> {
                 ),
               ),
               Padding(
-                  padding: EdgeInsets.fromLTRB(0, 5, 0, 20),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 20),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ElevatedButton(
@@ -277,11 +279,8 @@ class _SearchPageState extends State<SearchApp> {
                         textScaleFactor: 1.5,
                       ),
                     ),
-                  )),
-              // const SizedBox(
-              //   // 검색 버튼아래에 빈공간 만들기
-              //   height: 20,
-              // ),
+                  )
+              ),
               Expanded(
                 child: SingleChildScrollView(
                   child: Column(

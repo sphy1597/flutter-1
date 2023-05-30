@@ -235,8 +235,8 @@ class _SearchHistoryState extends State<SearchHistory> {
             '검색 기록',
             style: TextStyle(
               color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ), textScaleFactor: 1.2,
+              fontWeight: FontWeight.bold),
+            textScaleFactor: 1.2,
           ),
           centerTitle: true,
           leading: IconButton(
@@ -262,7 +262,7 @@ class _SearchHistoryState extends State<SearchHistory> {
           future: _loadSearchRecords(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             } else if (snapshot.hasData) {
@@ -279,21 +279,21 @@ class _SearchHistoryState extends State<SearchHistory> {
                       ),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                    margin: const EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: ListTile(
                       title: Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                        padding: const EdgeInsets.fromLTRB(0, 5, 0, 5),
                         child: Text(
                           searchRecord,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              height: 1.4
-                          ), textScaleFactor: 1.0,
+                              height: 1.4),
+                          textScaleFactor: 1.0,
                         ),
                       ),
                       trailing: IconButton(
-                        icon: Icon(Icons.delete),
+                        icon: const Icon(Icons.delete),
                         onPressed: () {
                           _deleteSearchRecord(searchRecord);
                         },
@@ -306,7 +306,7 @@ class _SearchHistoryState extends State<SearchHistory> {
                 },
               );
             } else {
-              return Center(child: Text('No search records found.'));
+              return const Center(child: Text('No search records found.'));
             }
           },
         ),

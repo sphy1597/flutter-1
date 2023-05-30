@@ -146,10 +146,8 @@ class _AllergyInfoState extends State<AllergyInfo> {
                               alignment: Alignment.topLeft,
                               child: Text(
                                   '알러지 선택 (총 20종)',
-                                  style: TextStyle(
-                                    fontSize: 25.0,
-                                    color: Colors.black,
-                                  ),
+                                  style: TextStyle(color: Colors.black),
+                                  textScaleFactor: 1.4,
                                   textAlign: TextAlign.left
                               )
                           )
