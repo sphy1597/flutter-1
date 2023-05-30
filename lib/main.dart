@@ -12,6 +12,7 @@ import 'package:alarm/alarm.dart';
 import 'package:app/search/searchHistory.dart';
 import 'package:app/settings/user_info.dart';
 import 'package:app/settings/allergy_info.dart';
+import 'package:app/settings/help.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -159,7 +160,7 @@ class MyButton extends StatelessWidget {
                                 maximumSize: const Size(130, 130),
                                 elevation: 0.0),
                             child: SingleChildScrollView(
-                                physics: NeverScrollableScrollPhysics(),
+                                physics: const NeverScrollableScrollPhysics(),
                                 child: Column(
                                   children: const [
                                     Padding(
@@ -270,7 +271,7 @@ class MyButton extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(builder: (context) => AlarmWidget()));
-                              print('복용 알림 button');
+                              print('복용 알람 button');
                               },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: const Color.fromARGB(255, 203, 241, 245),
@@ -290,7 +291,7 @@ class MyButton extends StatelessWidget {
                                     Padding(
                                       padding: EdgeInsets.zero,
                                       child: Text(
-                                        '복용 알림',
+                                        '복용 알람',
                                         style: TextStyle(
                                             color: Colors.black,
                                             fontWeight: FontWeight.bold),
@@ -429,6 +430,31 @@ class MyButton extends StatelessWidget {
                     ],
                   ),
                   // 도움말
+                )
+            )
+        ),
+        bottomNavigationBar: BottomAppBar(
+            child: SizedBox(
+                height: 56.0,
+                child: ElevatedButton(
+                    onPressed: () {
+                      print('도움말 button');
+                      AudioUtil.audioplay();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HelpWidget()));
+                      },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Image.asset('assets/images/help.png', fit: BoxFit.contain, height: 28),
+                        const Text(
+                            ' 도움말',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                            textScaleFactor: 1.5
+                        )
+                      ],
+                    )
                 )
             )
         )
