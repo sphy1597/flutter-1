@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:app/audioutill/audioUtil.dart';
+import 'package:url_launcher/url_launcher.dart'; // 패키지
+
 import 'package:app/main.dart';
 import 'package:app/qr/qrcamera.dart';
-import 'package:url_launcher/url_launcher.dart'; // 패키지
+
 
 class QRcodeWidget extends StatefulWidget {
   const QRcodeWidget({Key? key}) : super(key: key);

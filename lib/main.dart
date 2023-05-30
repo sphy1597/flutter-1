@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'dart:async';
+import 'package:app/audioutill/audioUtil.dart';
 
 import 'package:app/qr/qr.dart';
 import 'package:app/search/imageSearch.dart';
@@ -9,11 +12,6 @@ import 'package:alarm/alarm.dart';
 import 'package:app/search/searchHistory.dart';
 import 'package:app/settings/user_info.dart';
 import 'package:app/settings/allergy_info.dart';
-
-
-import 'dart:async';
-import 'package:flutter/services.dart';
-import 'package:app/audioutill/audioUtil.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

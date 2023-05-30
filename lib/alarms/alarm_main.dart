@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:app/audioutill/audioUtil.dart';
 
+import 'package:app/main.dart';
 import 'package:alarm/alarm.dart';
 import 'package:app/alarms/alarm_edit.dart';
 import 'package:app/alarms/alarm_ring.dart';
 import 'package:app/alarms/alarm_tile.dart';
-import 'package:flutter/material.dart';
-import 'package:app/main.dart';
-import 'package:app/audioutill/audioUtil.dart';
 
 class AlarmWidget extends StatefulWidget {
   const AlarmWidget({Key? key}) : super(key: key);
