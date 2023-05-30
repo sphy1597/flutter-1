@@ -235,7 +235,7 @@ class _UserInfoState extends State<UserInfo> {
                               child: Text(
                                   '성별',
                                   style: TextStyle(color: Colors.black),
-                                  textScaleFactor: 1.2,
+                                  textScaleFactor: 1.4,
                                   textAlign: TextAlign.left
                               )
                           )
