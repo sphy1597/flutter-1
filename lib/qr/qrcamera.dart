@@ -12,7 +12,8 @@ class QRcameraWidget extends StatefulWidget {
 class _QRcameraWidgetState extends State<QRcameraWidget> {
   final GlobalKey qrKey = GlobalKey(debugLabel: "QR");
   QRViewController? controller;
-  String result = "";
+
+  String result = "QR코드가 인식되면 소리가 나면서 화면이 전환됩니다.";
 
   @override
   void dispose() {
@@ -25,19 +26,25 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
     this.controller = controller;
     controller.scannedDataStream.listen((scanData) {
       if (scanData.code != null) {
-        AudioUtil.audioplay();
-
         //태그로 잘라서 바로 넘어감
-        if (scanData.code!.contains('레세티정')) {
+        if (scanData.code!.contains('medieye:')) {
           AudioUtil.audioplay();
           this.controller!.dispose();
           Navigator.pop(context, scanData.code);
+        } else if (scanData.code!.contains('https:')) {
+          AudioUtil.audioplay();
+          this.controller!.dispose();
+          Navigator.pop(context, scanData.code);
+        } else if (scanData.code!.contains('http:')) {
+          AudioUtil.audioplay();
+          this.controller!.dispose();
+          Navigator.pop(context, scanData.code);
+        } else {
+          setState(() {
+            result = scanData.code!;
+          });
         }
       }
-
-      setState(() {
-        result = scanData.code!;
-      });
     });
   }
 
@@ -45,7 +52,15 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("QR Code Scanner"),
+        title: const Text(
+          "QR코드 카메라",
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+          textScaleFactor: 1.2,
+          textAlign: TextAlign.center,
+        ),
       ),
       body: Column(
         children: [
@@ -54,15 +69,21 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
               child: QRView(
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
-              )),
-          const Expanded(
+              )
+          ),
+          Expanded(
               flex: 2,
               child: Center(
-                child: Text(
-                  "QR코드를 카메라에 보여주세요",
-                  style: TextStyle(fontSize: 20),
-                ),
-              )),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                  child: Text(
+                    result,
+                    textScaleFactor: 1.5,
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              )
+          ),
         ],
       ),
     );

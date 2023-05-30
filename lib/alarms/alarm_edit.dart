@@ -1,8 +1,10 @@
-import 'package:alarm/alarm.dart';
 import 'package:flutter/material.dart';
+import 'package:app/audioutill/audioUtil.dart';
+
+import 'package:alarm/alarm.dart';
+
 import 'package:time_picker_sheet/widget/time_picker.dart';
 import 'package:time_picker_sheet/widget/sheet.dart';
-import 'package:app/audioutill/audioUtil.dart';
 
 class AlarmEdit extends StatefulWidget {
   final AlarmSettings? alarmSettings;
@@ -54,11 +56,19 @@ class _AlarmEditState extends State<AlarmEdit> {
     final res = await TimePicker.show(
         context: context,
         sheet: TimePickerSheet(
-            minuteInterval: 1,
-            sheetTitle: '시간설정',
-            minuteTitle: '분',
-            hourTitle: '시',
-            saveButtonText: '저장'));
+          minuteInterval: 1,
+          sheetTitle: '시간설정',
+          minuteTitle: '분',
+          hourTitle: '시',
+          saveButtonText: '저장',
+          saveButtonColor: Colors.orange,
+          sheetCloseIconColor: Colors.orange,
+          hourTitleStyle: TextStyle(color: Colors.orange, fontSize: 22),
+          minuteTitleStyle: TextStyle(color: Colors.orange, fontSize: 22),
+          wheelNumberSelectedStyle:
+              TextStyle(color: Colors.orange, fontSize: 24),
+          wheelNumberItemStyle: TextStyle(fontSize: 20),
+        ));
     if (res != null)
       setState(() {
         selectedTime = TimeOfDay(hour: res.hour, minute: res.minute);
@@ -136,7 +146,7 @@ class _AlarmEditState extends State<AlarmEdit> {
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
-                      .copyWith(color: Colors.blueAccent),
+                      .copyWith(color: Colors.orange),
                 ),
               ),
               TextButton(
@@ -146,7 +156,7 @@ class _AlarmEditState extends State<AlarmEdit> {
                   style: Theme.of(context)
                       .textTheme
                       .titleLarge!
-                      .copyWith(color: Colors.blueAccent),
+                      .copyWith(color: Colors.orange),
                 ),
               ),
             ],
@@ -161,7 +171,7 @@ class _AlarmEditState extends State<AlarmEdit> {
                 style: Theme.of(context)
                     .textTheme
                     .displayMedium!
-                    .copyWith(color: Colors.blueAccent),
+                    .copyWith(color: Colors.orange),
               ),
             ),
           ),
