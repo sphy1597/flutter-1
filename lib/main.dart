@@ -32,9 +32,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'button',
       theme: ThemeData(
-        primarySwatch: ColorService.createMaterialColor(const Color(0xFFA6E3E9)),
-        fontFamily: "Cafe24"
-      ),
+          primarySwatch:
+              ColorService.createMaterialColor(const Color(0xFFA6E3E9)),
+          fontFamily: "Cafe24"),
       home: const MyButton(),
     );
   }
@@ -69,19 +69,16 @@ class MyButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/images/medieyes.png', fit: BoxFit.contain, height: 32),
-              const Text(
-                '  약리미',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold),
-                textScaleFactor: 1.5,
-              )
-            ]
-          ),
+          title: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Image.asset('assets/images/medieyes.png',
+                fit: BoxFit.contain, height: 32),
+            const Text(
+              '  약리미',
+              style:
+                  TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              textScaleFactor: 1.5,
+            )
+          ]),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
@@ -92,7 +89,8 @@ class MyButton extends StatelessWidget {
                 child: Align(
                   alignment: const AlignmentDirectional(0, 0),
                   child: GridView(
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 0.0,
                       mainAxisSpacing: 0.0,
@@ -101,338 +99,325 @@ class MyButton extends StatelessWidget {
                     children: [
                       // QR코드 검색
                       Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ElevatedButton(
-                          //QR코드 검색 버튼 누르면 실행되는 기능
-                          onPressed: () {
-                            print('QR코드 검색 button');
-                            AudioUtil.audioplay(); // 화면 전환 소리
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => QRcodeWidget()));
-                            },
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              minimumSize: const Size(130, 130),
-                              elevation: 0.0),
-                          child: SingleChildScrollView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              child: Column(
-                                children: const [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                    child: Image(image: AssetImage('assets/images/qr_code.png'), width: 40.0),
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                              //QR코드 검색 버튼 누르면 실행되는 기능
+                              onPressed: () {
+                                print('QR코드 검색 button');
+                                AudioUtil.audioplay(); // 화면 전환 소리
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => QRcodeWidget()));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.zero,
-                                    child: Text(
-                                      'QR코드 검색',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                      textScaleFactor: 1.5,
-                                    )
-                                  )
-                                ]
-                              )
-                          )
-                        )
-                      ),
+                                  minimumSize: const Size(130, 130),
+                                  elevation: 0.0),
+                              child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(children: const [
+                                    Padding(
+                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                      child: Image(
+                                          image: AssetImage(
+                                              'assets/images/qr_code.png'),
+                                          width: 40.0),
+                                    ),
+                                    Padding(
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          'QR/바코드 검색',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                          textScaleFactor: 1.5,
+                                        ))
+                                  ])))),
                       // 이미지 검색
                       Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              AudioUtil.audioplay();
-                              print('이미지 검색');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => IMSAPP()));
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                AudioUtil.audioplay();
+                                print('이미지 검색');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => IMSAPP()));
                               },
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)
-                                ),
-                                maximumSize: const Size(130, 130),
-                                elevation: 0.0),
-                            child: SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: Column(
-                                  children: const [
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                  maximumSize: const Size(130, 130),
+                                  elevation: 0.0),
+                              child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(children: const [
                                     Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                      child: Image(image: AssetImage('assets/images/pill.png'), width: 40.0)),
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                        child: Image(
+                                            image: AssetImage(
+                                                'assets/images/pill.png'),
+                                            width: 40.0)),
                                     Padding(
-                                      padding: EdgeInsets.zero,
-                                      child: Text(
-                                        '이미지 검색',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold
-                                        ),
-                                        textScaleFactor: 1.5,
-                                      )
-                                    )
-                                  ]
-                                )
-                            )
-                        )
-                      ),
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          '이미지 검색',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                          textScaleFactor: 1.5,
+                                        ))
+                                  ])))),
                       // 글자 인식
                       Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              AudioUtil.audioplay();
-                              print('글자 인식 button');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const OCRApp()));
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                AudioUtil.audioplay();
+                                print('글자 인식 button');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const OCRApp()));
                               },
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0)
-                                ),
-                                maximumSize: const Size(130, 130),
-                                elevation: 0.0),
-                            child: SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: Column(
-                                  children: const [
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(10.0)),
+                                  maximumSize: const Size(130, 130),
+                                  elevation: 0.0),
+                              child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(children: const [
                                     Padding(
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                      child: Image(image: AssetImage('assets/images/ocr.png'), width: 40.0),
+                                      child: Image(
+                                          image: AssetImage(
+                                              'assets/images/ocr.png'),
+                                          width: 40.0),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.zero,
-                                      child: Text(
-                                        '글자 인식',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                        textScaleFactor: 1.5,
-                                      )
-                                    )
-                                  ]
-                                )
-                            )
-                        )
-                      ),
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          '글자 인식',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                          textScaleFactor: 1.5,
+                                        ))
+                                  ])))),
                       // 약 검색
                       Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              AudioUtil.audioplay();
-                              print('약 검색 button');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => SearchApp()));
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                AudioUtil.audioplay();
+                                print('약 검색 button');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SearchApp()));
                               },
-                            style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                maximumSize: const Size(130, 130),
-                                elevation: 0.0),
-                            child: SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: Column(
-                                  children: const [
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  maximumSize: const Size(130, 130),
+                                  elevation: 0.0),
+                              child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(children: const [
                                     Padding(
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                      child: Image(image: AssetImage('assets/images/search.png'), width: 40.0),
+                                      child: Image(
+                                          image: AssetImage(
+                                              'assets/images/search.png'),
+                                          width: 40.0),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.zero,
-                                      child: Text(
-                                        '약 검색',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                        textScaleFactor: 1.5,
-                                      )
-                                    )
-                                  ]
-                                )
-                            )
-                        )
-                      ),
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          '약 검색',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                          textScaleFactor: 1.5,
+                                        ))
+                                  ])))),
                       // 복용 알림
                       Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              AudioUtil.audioplay();
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => AlarmWidget()));
-                              print('복용 알람 button');
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                AudioUtil.audioplay();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AlarmWidget()));
+                                print('복용 알람 button');
                               },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(255, 203, 241, 245),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                maximumSize: const Size(130, 130),
-                                elevation: 0.0),
-                            child: SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: Column(
-                                  children: const [
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 203, 241, 245),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  maximumSize: const Size(130, 130),
+                                  elevation: 0.0),
+                              child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(children: const [
                                     Padding(
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                      child: Image(image: AssetImage('assets/images/alarm.png'), width: 40.0),
+                                      child: Image(
+                                          image: AssetImage(
+                                              'assets/images/alarm.png'),
+                                          width: 40.0),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.zero,
-                                      child: Text(
-                                        '복용 알람',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                        textScaleFactor: 1.5,
-                                      )
-                                    )
-                                  ]
-                                )
-                            )
-                        )
-                      ),
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          '복용 알람',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                          textScaleFactor: 1.5,
+                                        ))
+                                  ])))),
                       // 검색 기록
                       Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              AudioUtil.audioplay();
-                              print('검색 기록 button');
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(builder: (context) => SearchHistory()));
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                AudioUtil.audioplay();
+                                print('검색 기록 button');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SearchHistory()));
                               },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(255, 203, 241, 245),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                maximumSize: const Size(130, 130),
-                                elevation: 0.0),
-                            child: SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: Column(
-                                  children: const [
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 203, 241, 245),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  maximumSize: const Size(130, 130),
+                                  elevation: 0.0),
+                              child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(children: const [
                                     Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                      child: Image(image: AssetImage('assets/images/history.png'), width: 40.0)),
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                        child: Image(
+                                            image: AssetImage(
+                                                'assets/images/history.png'),
+                                            width: 40.0)),
                                     Padding(
-                                      padding: EdgeInsets.zero,
-                                      child: Text(
-                                        '검색 기록',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                        textScaleFactor: 1.5,
-                                      )
-                                    )
-                                  ]
-                                )
-                            )
-                        )
-                      ),
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          '검색 기록',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                          textScaleFactor: 1.5,
+                                        ))
+                                  ])))),
                       // 기본정보
                       Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ElevatedButton(
-                          //QR코드 검색 버튼 누르면 실행되는 기능
-                          onPressed: () {
-                            print('개인 기본정보 btn 눌림');
-                            AudioUtil.audioplay(); // 화면 전환 소리
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => const UserInfo()));
-                            },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(255, 203, 241, 245),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              maximumSize: const Size(130, 130),
-                              elevation: 0.0),
-                          child: SingleChildScrollView(
-                              physics: const NeverScrollableScrollPhysics(),
-                              child: Column(
-                                children: const [
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                    child: Image(image: AssetImage('assets/images/user.png'), width: 40.0,),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.zero,
-                                    child: Text(
-                                      '기본정보',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.bold
-                                      ),
-                                      textScaleFactor: 1.5,
-                                    )
-                                  )
-                                ]
-                              )
-                          )
-                        )
-                      ),
-                      // 알러지 정보
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ElevatedButton(
-                            onPressed: () {
-                              AudioUtil.audioplay();
-                              print('질병 및 알러지 정보 btn 눌림');
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const AllergyInfo(title: '')));
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                              //QR코드 검색 버튼 누르면 실행되는 기능
+                              onPressed: () {
+                                print('개인 기본정보 btn 눌림');
+                                AudioUtil.audioplay(); // 화면 전환 소리
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const UserInfo()));
                               },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(255, 203, 241, 245),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                maximumSize: const Size(130, 130),
-                                elevation: 0.0),
-                            child: SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: Column(
-                                  children: const [
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 203, 241, 245),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  maximumSize: const Size(130, 130),
+                                  elevation: 0.0),
+                              child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(children: const [
                                     Padding(
                                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                      child: Image(image: AssetImage('assets/images/allergy.png'), width: 40.0)
+                                      child: Image(
+                                        image: AssetImage(
+                                            'assets/images/user.png'),
+                                        width: 40.0,
+                                      ),
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.zero,
-                                      child: Text(
-                                        '질병 및 알러지',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.bold),
-                                        textScaleFactor: 1.5,
-                                      )
-                                    )
-                                  ]
-                                )
-                            )
-                        )
-                      ),
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          '기본정보',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                          textScaleFactor: 1.5,
+                                        ))
+                                  ])))),
+                      // 알러지 정보
+                      Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: ElevatedButton(
+                              onPressed: () {
+                                AudioUtil.audioplay();
+                                print('질병 및 알러지 정보 btn 눌림');
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const AllergyInfo(title: '')));
+                              },
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor:
+                                      const Color.fromARGB(255, 203, 241, 245),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                  ),
+                                  maximumSize: const Size(130, 130),
+                                  elevation: 0.0),
+                              child: SingleChildScrollView(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  child: Column(children: const [
+                                    Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(0, 0, 0, 5),
+                                        child: Image(
+                                            image: AssetImage(
+                                                'assets/images/allergy.png'),
+                                            width: 40.0)),
+                                    Padding(
+                                        padding: EdgeInsets.zero,
+                                        child: Text(
+                                          '질병 및 알러지',
+                                          style: TextStyle(
+                                              color: Colors.black,
+                                              fontWeight: FontWeight.bold),
+                                          textScaleFactor: 1.5,
+                                        ))
+                                  ])))),
                     ],
                   ),
                   // 도움말
-                )
-            )
-        ),
+                ))),
         bottomNavigationBar: BottomAppBar(
             child: SizedBox(
                 height: 56.0,
@@ -442,22 +427,18 @@ class MyButton extends StatelessWidget {
                       AudioUtil.audioplay();
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const HelpWidget()));
-                      },
+                          MaterialPageRoute(
+                              builder: (context) => const HelpWidget()));
+                    },
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset('assets/images/help.png', fit: BoxFit.contain, height: 28),
-                        const Text(
-                            ' 도움말',
+                        Image.asset('assets/images/help.png',
+                            fit: BoxFit.contain, height: 28),
+                        const Text(' 도움말',
                             style: TextStyle(fontWeight: FontWeight.bold),
-                            textScaleFactor: 1.5
-                        )
+                            textScaleFactor: 1.5)
                       ],
-                    )
-                )
-            )
-        )
-    );
+                    )))));
   }
 }

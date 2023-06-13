@@ -184,7 +184,7 @@ class _SearchHistoryState extends State<SearchHistory> {
                 Text("다음과 같은 알러지 유발 물질이 포함되어 있습니다.\n",
                     style: TextStyle(fontWeight: FontWeight.bold),
                     textScaleFactor: 1.1),
-                Text('" ' + result.trim() + ' "ㄲ',
+                Text('" ' + result.trim() + ' "',
                     style: const TextStyle(color: Colors.red),
                     textScaleFactor: 1.5),
               ],
