@@ -40,9 +40,9 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
           this.controller!.dispose();
           Navigator.pop(context, scanData.code);
         } else {
-          setState(() {
-            result = scanData.code!;
-          });
+          AudioUtil.audioplay();
+          this.controller!.dispose();
+          Navigator.pop(context, scanData.code);
         }
       }
     });
@@ -69,21 +69,18 @@ class _QRcameraWidgetState extends State<QRcameraWidget> {
               child: QRView(
                 key: qrKey,
                 onQRViewCreated: _onQRViewCreated,
-              )
-          ),
+              )),
           Expanded(
               flex: 2,
               child: Center(
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  child: Text(
-                    result,
-                    textScaleFactor: 1.5,
-                    textAlign: TextAlign.center,
-                  ),
-                )
-              )
-          ),
+                  child: Padding(
+                padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                child: Text(
+                  result,
+                  textScaleFactor: 1.5,
+                  textAlign: TextAlign.center,
+                ),
+              ))),
         ],
       ),
     );
