@@ -1,3 +1,4 @@
+
 # Medieyes - Medication Assistance Service for Visually Impaired Individuals
 
 ## Overview
@@ -24,6 +25,11 @@ MediAssist is a mobile application designed to assist visually impaired and low-
 -   Eunyoung Go: [GitHub](https://github.com/favorcat)
 -   Jaewoon Sim: [GitHub](https://github.com/jaejae990921)
 -   Gyucheol Sim: [GitHub](https://github.com/sphy1597)
+
+## Use API
+
+-   NAVER CLOVA OCR : https://clova.ai/
+-  E약은요(약정보검색) : https://www.data.go.kr/data/15075057/openapi.do
 
 ## License
 
@@ -56,6 +62,12 @@ This project is licensed under the [MIT License](https://chat.openai.com/path/to
 - 고은영 : https://github.com/favorcat
 - 심재운 : https://github.com/jaejae990921
 - 심규철 : https://github.com/sphy1597
+
+
+## Use API
+
+-   NAVER CLOVA OCR : https://clova.ai/
+-  E약은요(약정보검색) : https://www.data.go.kr/data/15075057/openapi.do
 
 ## 라이선스
 이 프로젝트는 [MIT 라이선스](/path/to/license)를 따릅니다.
