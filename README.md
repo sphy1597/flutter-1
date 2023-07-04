@@ -1,4 +1,4 @@
-# MediAssist - Medication Assistance Service for Visually Impaired Individuals
+# Medieyes - Medication Assistance Service for Visually Impaired Individuals
 
 ## Overview
 
